@@ -13,6 +13,13 @@ function do_process() {
 }
 
 function checkAnswer() {
+  if (question_index === init_content["data"].length - 1) {
+    //
+    console.log("모든 정답 완료");
+  }
+
+  console.log();
+
   let question = init_content["data"][question_index]["question"];
   let answer = init_content["data"][question_index]["answer"];
   let input_answer = $("#input_answer").val();
@@ -20,7 +27,13 @@ function checkAnswer() {
   console.log(question);
   console.log(answer);
   if (input_answer === answer) {
+    // Next step
     console.log("정답");
+    $("#input_answer").val("");
+    question_index += 1;
+
+    // 문제 세팅
+    showQuestion();
   }
 }
 
