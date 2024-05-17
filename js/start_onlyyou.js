@@ -13,6 +13,9 @@ function init_onlyyou() {
 
 function do_process() {
   alert("start");
+  // 질문 노출
+  showQuestion();
+  oy_go_next();
 }
 
 function showQuestion() {
