@@ -16,7 +16,9 @@
         <script>
             $(window).load(function () {
                 // Yes or No Button
+                $("#ul_submit_btn").hide();
                 $("#ul_oy_btn").hide();
+                $("#div_answer").hide();
             });
         </script>
     </head>
@@ -31,16 +33,25 @@
                     <!-- 컨텐츠 저장에 사용 -->
                     <div class="div_oy_text">
                         <img class="img_oy_text" src="" />
-                        <p class="p_oy_text"></p>
+                        <p id="div_content" class="p_oy_text"></p>
                     </div>
                     <ul id="ul_start_btn">
-                        <li onclick="do_process()">Start!</li>
+                        <li onclick="do_process()">Start</li>
                     </ul>
-                    <div id="quiz">
-                        <p id="question"></p>
-                        <input type="text" id="answer" />
-                        <button id="submit">제출</button>
+                    <div>
+                        <p id="p_question"></p>
+
+                        <div id="div_answer">
+                            <input
+                                id="input_answer"
+                                type="text"
+                                placeholder="답변을 작성하고 Submit 클릭!"
+                            />
+                        </div>
                     </div>
+                    <ul id="ul_submit_btn">
+                        <li onclick="checkAnswer()">Submit</li>
+                    </ul>
                     <ul id="ul_oy_btn">
                         <li onclick="oy_go_next()">Yes&nbsp;&nbsp;❤</li>
                         <li onclick="oy_show_benefit()">No&nbsp;&nbsp;✖</li>
@@ -87,26 +98,14 @@
                         </audio>
                     </div>
                     <div class="div_record_tips"></div>
-                    <!--
-                    <div
-                        class="div_btn"
-                        id="div_record"
-                        onclick="record_switch()"
-                    >
-                        <audio id="audio_record" loop="loop">
-                            <source type="audio/mpeg" />
-                        </audio>
-                    </div>
-                     -->
                 </div>
             </div>
         </div>
 
         <!-- JQuery -->
         <script src="js/init.js"></script>
+        <script src="js/music.js"></script>
+        <script src="js/script.js"></script>
         <script src="js/typed.min.js"></script>
-        <script src="js/start_onlyyou.js"></script>
-        <script src="js/jweixin-1.2.0.js"></script>
-        <script src="js/theme_common.js"></script>
     </body>
 </html>

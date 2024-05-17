@@ -1,7 +1,7 @@
-var start_content = {
+let question_index = 0;
+const init_content = {
   text: "당신은... 나의 아내가 맞는가? 사랑스러운 나의 아내 다영이만 올 수 있는 곳인데... <br>다영이가 맞는지 확인을 해야겠어 !!<br><um style='color: #F44336;font-weight:300;'>내가 내는 문제를 맞춰봐!!</um>",
-  question_index: 0,
-  question: [
+  data: [
     {
       question: "대한민국의 수도는 어디인가요?",
       answer: "서울",
@@ -305,4 +305,17 @@ function init_attachment() {
     default:
       return;
   }
+}
+
+function init_onlyyou() {
+  // 두 div의 높이를 초기화
+  $("#div_onlyyou").css({ height: $(window).height() + "px" });
+  //$("#div_oy_inner").css({ height: $(window).height() + 260 + "px" });
+
+  $("#div_onlyyou").css({
+    "background-image": "url(" + init_content["bg_img"] + ")",
+    "background-repeat": "no-repeat",
+  }); // 사용자 정의 배경 설정
+  $("#div_content").html(init_content["text"]); // 사용자 정의 불러오기 - 내용
+  $(".img_oy_text").attr("src", init_content["img_src"]); // 사용자 정의 불러오기 - 이미지
 }
