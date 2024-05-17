@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap");
-/*@import url(//fonts.googleapis.com/earlyaccess/nanumpenscript.css);*/
+@import url("//fonts.googleapis.com/earlyaccess/nanumpenscript.css");
 
 .nanumpenscript * {
     font-family: "Nanum Pen Script", cursive;

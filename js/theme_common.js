@@ -94,34 +94,18 @@ function music_switch() {
   */
 }
 
+/*
 wx.ready(function () {
   console.log("wx.ready success to start");
   audio_music.play(); // 자동으로 음악 재생하기
   wx.checkJsApi({
     jsApiList: ["updateAppMessageShareData", "updateTimelineShareData"], // 需要检测的JS接口列表，所有JS接口列表见附录2,
     success: function (res) {
-      console.log("wx.checkJsApi success");
-      if (
-        theme != "audio_list" ||
-        (theme == "audio_list" && start_id != "null")
-      ) {
-        audio_music.play(); // 자동으로 음악 재생하기
-      } else {
-        audio_music.pause();
-        console.log("audio_list && no start");
-      }
+      console.log("Music play");
+      audio_music.play(); // 자동으로 음악 재생하기
     },
     complete: function (res) {
-      console.log("wx.checkJsApi complete");
-      if (
-        theme != "audio_list" ||
-        (theme == "audio_list" && start_id != "null")
-      ) {
-        audio_music.play(); // 자동으로 음악 재생하기
-      } else {
-        audio_music.pause();
-        console.log("audio_list && no start");
-      }
+      audio_music.play(); // 자동으로 음악 재생하기
     },
   });
 });
@@ -157,3 +141,5 @@ wx.error(function (res) {
     },
   });
 });
+
+*/
