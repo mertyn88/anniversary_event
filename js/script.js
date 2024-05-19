@@ -16,6 +16,7 @@ function do_process() {
 function checkAnswer() {
   let question = init_content["data"][question_index]["question"];
   let answer = init_content["data"][question_index]["answer"];
+  let fail_message = init_content["data"][question_index]["message"];
   let input_answer = $("#input_answer").val();
 
   console.log(question);
@@ -37,7 +38,7 @@ function checkAnswer() {
     }
   } else {
     // 답변 틀렸을 경우
-    alert("다영이가 아니면 예쁜사진 봤으니 나가라!");
+    alert(fail_message);
     $("#input_answer").val("");
   }
 }

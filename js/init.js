@@ -4,24 +4,29 @@ const init_content = {
   data: [
     {
       question: "남편의 생년월일은?! 6자리로 입력",
-      answer: "880421"
+      answer: "880421",
+      message: "다영이가 남편 생일을 몰라? 다영이 아니면 돌아가라",
     },
     {
       question: "우리 연애의 시작일은?! 6자리로 입력",
-      answer: "170603"
+      answer: "170603",
+      message: "다영이가 연애 시작일을 몰라? 너 누구야!",
     },
     {
       question: "우리 결혼날짜는? 6자리로 입력",
-      answer: "230520"
+      answer: "230520",
+      message: "다영이가 아니면 예쁜사진 봤으니 나가라!",
     },
     {
       question: "우리집 비밀번호는?!",
-      answer: "1503"
+      answer: "1503",
+      message: "다영이가 집 비밀번호를 모를리가 없다! 다영이만 와라!",
     },
     {
       question: "이준명 VS 김수현",
-      answer: "이준명"
-    }
+      answer: "이준명",
+      message: "다영이는 내가 제일 잘생겼다고 했는데...",
+    },
   ],
   bg_style: "bg_custom",
   bg_img: "images/2.jpg",
@@ -39,10 +44,10 @@ var hours = today.getHours(); // 시
 var minutes = today.getMinutes(); // 분
 var seconds = today.getSeconds(); // 초
 
-function date_diff(before_date){
+function date_diff(before_date) {
   before_date = Math.floor(new Date(before_date).getTime() / 1000);
   let now_date = Math.floor(Date.now() / 1000);
-  return Math.floor((now_date-before_date) / (60 * 60 * 24)) - 1;
+  return Math.floor((now_date - before_date) / (60 * 60 * 24)) - 1;
 }
 
 const theme_content = {
@@ -51,7 +56,7 @@ ${year}년 ${month}월 ${date}일 ${hours}시 ${minutes}분 ${seconds}초, 작�
 
 To.사랑하는 다영이에게
 
-오늘은 우리가 만난지 <um style='color: #F44336;font-weight: 300;'>${date_diff('2017-06-03')}일</um>, 서로의 인생에 영원한 약속을 한 지  <um style='color: #F44336;font-weight: 300;'>${date_diff('2023-05-20')}일</um>이 되는 날이야. 다영이와 함께한 시간이 나에겐 인생에서 가장 아름다운 날이였어.
+오늘은 우리가 만난지 <um style='color: #F44336;font-weight: 300;'>${date_diff("2017-06-03")}일</um>, 서로의 인생에 영원한 약속을 한 지  <um style='color: #F44336;font-weight: 300;'>${date_diff("2023-05-20")}일</um>이 되는 날이야. 다영이와 함께한 시간이 나에겐 인생에서 가장 아름다운 날이였어.
 
 가끔 외로움이 있지만 혼자지내는것도 좋다고 말했던 내가, 이제는 혼자보다는 사랑하는 사람과 함께 있는것이 가장 좋다고 말할 수 있어.
 
