@@ -1,93 +1,110 @@
 ﻿<!doctype html>
 <html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>다영이</title>
+        <meta name="language" content="ko" />
+        <meta name="title" content="love letter" />
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="https://cdn.jsdelivr.net/gh/sun0225SUN/photos/img/20210715233345.png"
+        />
+        <link type="text/css" rel="stylesheet" href="css/theme.css" />
 
-<head>
-    <meta charset="UTF-8" />
-    <title>다영이</title>
-    <meta name="language" content="ko" />
-    <meta name="title" content="love letter" />
-    <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/sun0225SUN/photos/img/20210715233345.png" />
-    <link type="text/css" rel="stylesheet" href="css/theme.css" />
+        <script src="js/jquery-2.0.3.min.js"></script>
+        <script>
+            $(window).load(function () {
+                // Yes or No Button
+                $("#ul_submit_btn").hide();
+                $("#ul_oy_btn").hide();
+                $("#div_answer").hide();
+            });
+        </script>
+    </head>
 
-    <script src="js/jquery-2.0.3.min.js"></script>
-    <script>
-        $(window).load(function () {
-            // Yes or No Button
-            $("#ul_submit_btn").hide();
-            $("#ul_oy_btn").hide();
-            $("#div_answer").hide();
-        });
-    </script>
-</head>
+    <body>
+        <div id="div_container">
+            <!-- 가장 바깥쪽 div, 중앙 호환 PC 및 모바일용 -->
+            <div id="div_start_bg"></div>
+            <div id="div_onlyyou">
+                <!-- 배경 설정 -->
+                <div id="div_oy_inner">
+                    <!-- 컨텐츠 저장에 사용 -->
+                    <div class="div_oy_text">
+                        <img class="img_oy_text" src="" />
+                        <p id="div_content" class="p_oy_text"></p>
+                    </div>
+                    <ul id="ul_start_btn">
+                        <li onclick="do_process()">Start</li>
+                    </ul>
+                    <div>
+                        <p id="p_question"></p>
 
-<body>
-    <div id="div_container">
-        <!-- 가장 바깥쪽 div, 중앙 호환 PC 및 모바일용 -->
-        <div id="div_start_bg"></div>
-        <div id="div_onlyyou">
-            <!-- 배경 설정 -->
-            <div id="div_oy_inner">
-                <!-- 컨텐츠 저장에 사용 -->
-                <div class="div_oy_text">
-                    <img class="img_oy_text" src="" />
-                    <p id="div_content" class="p_oy_text"></p>
-                </div>
-                <ul id="ul_start_btn">
-                    <li onclick="do_process()">Start</li>
-                </ul>
-                <div>
-                    <p id="p_question"></p>
+                        <div id="div_answer">
+                            <input
+                                id="input_answer"
+                                type="text"
+                                placeholder="답변을 작성하고 Submit 클릭!"
+                            />
+                        </div>
+                    </div>
+                    <ul id="ul_submit_btn" style="display: none">
+                        <li onclick="checkAnswer()">Submit</li>
+                    </ul>
+                    <ul id="ul_oy_btn" style="display: none">
+                        <li onclick="oy_go_next()">Yes&nbsp;&nbsp;❤</li>
+                        <li onclick="oy_show_benefit()">No&nbsp;&nbsp;✖</li>
+                    </ul>
 
-                    <div id="div_answer">
-                        <input id="input_answer" type="text" placeholder="답변을 작성하고 Submit 클릭!" />
+                    <div id="div_oy_note" onclick="oy_hide_note()">
+                        <img
+                            src="images/emoji_kelian.jpg"
+                            alt=""
+                        /><br />Yes라고 해..
+                        <div id="div_oy_note_close">✖</div>
                     </div>
                 </div>
-                <ul id="ul_submit_btn">
-                    <li onclick="checkAnswer()">Submit</li>
-                </ul>
-                <ul id="ul_oy_btn">
-                    <li onclick="oy_go_next()">Yes&nbsp;&nbsp;❤</li>
-                    <li onclick="oy_show_benefit()">No&nbsp;&nbsp;✖</li>
-                </ul>
-
-                <div id="div_oy_note" onclick="oy_hide_note()">
-                    <img src="images/emoji_kelian.jpg" alt="" /><br />Yes라고 해..
-                    <div id="div_oy_note_close">✖</div>
+            </div>
+            <div class="div_pure_words">
+                <div class="div_pure_words_bg">
+                    <div class="div_pure_words_height"></div>
+                </div>
+                <div class="div_pw_typed">
+                    <span id="span_pw_typed"></span>
                 </div>
             </div>
-        </div>
-        <div class="div_pure_words">
-            <div class="div_pure_words_bg">
-                <div class="div_pure_words_height"></div>
-            </div>
-            <div class="div_pw_typed">
-                <span id="span_pw_typed"></span>
-            </div>
-        </div>
-        <div id="div_btn_container">
-            <div id="div_btn_inner">
-                <div class="div_music_tips"></div>
-                <div class="div_btn" id="div_music" onclick="music_switch()">
-                    <!-- 음악 버튼 -->
-                    <img id="img_music" src="images/music_note_big.png" style="
+            <div id="div_btn_container">
+                <div id="div_btn_inner">
+                    <div class="div_music_tips"></div>
+                    <div
+                        class="div_btn"
+                        id="div_music"
+                        onclick="music_switch()"
+                    >
+                        <!-- 음악 버튼 -->
+                        <img
+                            id="img_music"
+                            src="images/music_note_big.png"
+                            style="
                                 -webkit-animation: music_play_rotate 1s linear
                                     infinite;
-                            " />
-                    <!-- 브라우저에서 음악 재생을 지원하지 않습니다 -->
-                    <audio id="audio_music" autoplay="autoplay" loop="loop">
-                        <source type="audio/mpeg" />
-                    </audio>
+                            "
+                        />
+                        <!-- 브라우저에서 음악 재생을 지원하지 않습니다 -->
+                        <audio id="audio_music" autoplay="autoplay" loop="loop">
+                            <source type="audio/mpeg" />
+                        </audio>
+                    </div>
+                    <div class="div_record_tips"></div>
                 </div>
-                <div class="div_record_tips"></div>
             </div>
         </div>
-    </div>
 
-    <!-- JQuery -->
-    <script src="js/init.js"></script>
-    <script src="js/music.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/typed.min.js"></script>
-</body>
-
+        <!-- JQuery -->
+        <script src="js/init.js"></script>
+        <script src="js/music.js"></script>
+        <script src="js/script.js"></script>
+        <script src="js/typed.min.js"></script>
+    </body>
 </html>
