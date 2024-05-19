@@ -43,10 +43,10 @@ ul li:hover {
     display: none;
 }
 .div_pure_words_bg {
-    width: 500px;
-    min-height: 500px;
-    background-size: 100%;
-    background-repeat: repeat;
+    /*width: 500px;*/
+    /*min-height: 500px;*/
+    /*background-size: 100%;*/
+    background-repeat: no-repeat;
     background-attachment: fixed;
 }
 .div_pure_words_height {
@@ -60,20 +60,24 @@ ul li:hover {
 }
 .div_pw_typed {
     position: absolute;
-    top: 0;
+    top: -40px;
     right: 0;
     bottom: 0;
-    left: 0;
-    padding: 30px;
-    width: 500px;
+    /*left: 0;*/
+    /*padding: 30px;*/
+    padding: 0 10px 0 10px;
+    width: 100%;
     background: rgba(255, 255, 255, 0.8);
     text-align: justify;
+    margin-top: 40px;
+
 }
 #span_pw_typed {
     width: 100%;
-    white-space: pre-wrap;
+    white-space: pre-line;
     font-size: 1.1em;
-    font-family: "Microsoft YaHei", Arial;
+    line-height: 1.2;
+    margin-left: 90px;
 }
 #div_start_bg {
     position: absolute;

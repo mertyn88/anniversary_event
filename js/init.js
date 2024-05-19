@@ -3,25 +3,25 @@ const init_content = {
   text: "당신은... 나의 아내가 맞는가? 사랑스러운 나의 아내 다영이만 올 수 있는 곳인데... <br>다영이가 맞는지 확인을 해야겠어 !!<br><um style='color: #F44336;font-weight:300;'>내가 내는 문제를 맞춰봐!!</um>",
   data: [
     {
-      question: "대한민국의 수도는 어디인가요?",
-      answer: "서울",
+      question: "남편의 생년월일은?! 6자리로 입력",
+      answer: "880421"
     },
     {
-      question: "HTML의 약자는 무엇인가요?",
-      answer: "HyperText Markup Language",
+      question: "우리 연애의 시작일은?! 6자리로 입력",
+      answer: "170603"
     },
     {
-      question: "window 객체는 브라우저의 무엇을 나타내나요?",
-      answer: "창",
+      question: "우리 결혼날짜는? 6자리로 입력",
+      answer: "230520"
     },
-  ],
-  benefit: [
-    "간장게장 10개 사줄게",
-    "생마늘 100개도 먹을 수 있어",
-    "맛집 찾아다니진 않는데, 맛집 리스트 1,000개도 준비할 수 있어",
-    "높은 곳은 싫은데, 같이 가면 10,000KM 상공에서 점프도 할 수 있어",
-    "마지막으로 물어볼게!",
-    "<um style='color: #F44336;font-weight: 300;'>나랑 사귀자!!!</um>",
+    {
+      question: "우리집 비밀번호는?!",
+      answer: "1503"
+    },
+    {
+      question: "이준명 VS 김수현",
+      answer: "이준명"
+    }
   ],
   bg_style: "bg_custom",
   bg_img: "images/2.jpg",
@@ -39,29 +39,35 @@ var hours = today.getHours(); // 시
 var minutes = today.getMinutes(); // 분
 var seconds = today.getSeconds(); // 초
 
+function date_diff(before_date){
+  before_date = Math.floor(new Date(before_date).getTime() / 1000);
+  let now_date = Math.floor(Date.now() / 1000);
+  return Math.floor((now_date-before_date) / (60 * 60 * 24)) - 1;
+}
+
 const theme_content = {
-  pure_words_content: `
-        ${year}년 ${month}월 ${date}일 ${hours}시 ${minutes}분 ${seconds}초, 작성되는 준명이의 편지
+  pure_words_content: `<br>
+${year}년 ${month}월 ${date}일 ${hours}시 ${minutes}분 ${seconds}초, 작성되는 준명이의 편지
 
-    To. 사랑하는 다영이에게
+To.사랑하는 다영이에게
 
-    오늘은 우리가 서로의 인생에 영원한 약속을 한 지 1년이 되는 날이야. 다영이와 결혼한 지난 1년이 나에겐 인생에서 가장 아름다운 날이였어.
+오늘은 우리가 만난지 <um style='color: #F44336;font-weight: 300;'>${date_diff('2017-06-03')}일</um>, 서로의 인생에 영원한 약속을 한 지  <um style='color: #F44336;font-weight: 300;'>${date_diff('2023-05-20')}일</um>이 되는 날이야. 다영이와 함께한 시간이 나에겐 인생에서 가장 아름다운 날이였어.
 
-    가끔 외로움이 있지만 혼자지내는것도 좋다고 말했던 내가, 이제는 혼자보다는 사랑하는 사람과 함께 있는것이 가장 좋다고 말할 수 있어.
+가끔 외로움이 있지만 혼자지내는것도 좋다고 말했던 내가, 이제는 혼자보다는 사랑하는 사람과 함께 있는것이 가장 좋다고 말할 수 있어.
 
-    항상 다영이를 사랑했지만, 더 커질 수 없다고 느꼈던 사랑이 이제 부부가 됨으로써 더 커지게 된것 같아. 게임으로 치자면 전직????!!!!!
+항상 다영이를 사랑했지만, 더 커질 수 없다고 느꼈던 사랑이 이제 부부가 됨으로써 더 커지게 된것 같아. 게임으로 치자면 전직????!!!!!
 
-    그리고 작은 기적, 호떡이가 우리와 함께 하면서 더욱 행복해 질거야. 물론 우리도 다른 부부들처럼 육아를 힘들어 하고.. 잠도 제대로 못자고..
+그리고 우리의 커다란 기적, 호떡이가 함께 하면서 더욱 행복해 질거야. 물론 우리도 다른 부부들처럼 육아를 힘들어 하고.. 잠도 제대로 못자고..
 
-    서로 예민해지고 의견차이로 인해 싸울 수도 있겠지.. 하지만 그 상황을 슬기롭게 해결할 수 있다면 지금보다도 더한 사랑을, 현재와 앞으로의 미래가 우리의 인생에서 가장
+서로 예민해지고 의견차이로 인해 싸울 수도 있겠지.. 하지만 그 상황을 슬기롭게 해결할 수 있다면 지금보다도 더한 사랑을, 현재와 앞으로의 미래가 우리의 인생에서 가장
 
-    아름다운 날이 될것 같아.
+아름다운 날이 될것 같아.
 
-    다영이이자 준명이의 아내면서 호떡이의 엄마!
+다영이이자 준명이의 아내면서 호떡이의 엄마!
 
-    앞으로의 인생이 마냥 핑크빛은 아니지만 우리 함께 하면서 잘 사랑하고, 호떡이도 잘 키워보자!
+앞으로의 인생이 마냥 핑크빛은 아니지만 우리 함께 하면서 잘 사랑하고, 호떡이도 잘 키워보자!
 
-    사랑해 다영아!`,
+사랑해 다영아!`,
   typed_bool: "typed_y",
   cursor_char: "cursor_heart",
   bg_style_pure_words: "bg_opacity",
@@ -137,7 +143,7 @@ var interval_pw_height;
 var height_div_pw = $(".div_pure_words_height").height();
 
 function init_pure_words() {
-  $(".div_pure_words_height").html(pure_words_content + "22222"); // 복사 내용을 초기화하고 문서 높이를 늘립니다
+  $(".div_pure_words_height").html(pure_words_content); // 복사 내용을 초기화하고 문서 높이를 늘립니다
   // div의 bg 그림 초기화 설정
   if (
     typeof theme_content["bg_style_pure_words"] != "undefined" &&
@@ -218,7 +224,7 @@ function display_pure_words() {
   if (typed_bool) {
     var typed_pure_words = new Typed("#span_pw_typed", {
       strings: [pure_words_content], // 내용 입력, HTML 태그 지원
-      typeSpeed: 120, // 타이핑 속도
+      typeSpeed: 80, // 타이핑 속도
       cursorChar: str_cursorChar, // 커서 스타일 바꾸기
       contentType: "html", // 값이 html일 경우 인쇄된 텍스트 라벨을 html 라벨로 직접 해석
       onComplete: function (abc) {
