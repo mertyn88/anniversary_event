@@ -1,0 +1,76 @@
+<html>
+
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Cedarville+Cursive' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+
+    <script>
+        // 클래스 이름이 'zoomable-'로 시작하는 모든 요소를 선택합니다.
+        const zoomableImages = document.querySelectorAll('[class^="pic"]');
+
+        zoomableImages.forEach((img) => {
+            img.addEventListener('click', function () {
+                if (img.style.transform === 'scale(2)') {
+                    img.style.transform = 'scale(1)';
+                } else {
+                    img.style.transform = 'scale(2)';
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="background">
+        <div id="gallery">
+            <figure class="pic1">
+                <img src="images/test.jpg" />
+
+            </figure>
+            <figure class="pic2">
+                <img
+                    src="http://favim.com/orig/201107/03/art-desert-lo-fi-nature-neil-krug-photography-Favim.com-92907.jpg" />
+                <figcaption>Death valley</figcaption>
+            </figure>
+            <figure class="pic3">
+                <img
+                    src="http://cdn.c.photoshelter.com/img-get/I00003IZIy5yDWAE/s/880/880/Na-Mokulua-Five-Point-Sun-Rise.jpg" />
+                <figcaption>Early morning</figcaption>
+            </figure>
+            <figure class="pic4">
+                <img src="https://amp.businessinsider.com/images/507c71b8ecad048830000004-750-563.jpg" />
+                <figcaption>Lost.</figcaption>
+            </figure>
+            <figure class="pic5">
+                <img src="https://38.media.tumblr.com/tumblr_l8zzb3pezm1qdimp1o1_400.jpg" />
+                <figcaption>#Brooklyn</figcaption>
+            </figure>
+            <figure class="pic6">
+                <img src="http://www.adventure-journal.com/wp-content/uploads/2009/11/jackbrull01_470.jpg" />
+                <figcaption>Why now?</figcaption>
+            </figure>
+            <figure class="pic7">
+                <img src="http://www.webdesign.org/img_articles/22269/Sierra1.png" />
+                <figcaption>Verbier 10.08.2002</figcaption>
+            </figure>
+            <figure class="pic8">
+                <img src="http://media-cache-ak0.pinimg.com/236x/55/82/2d/55822d7c9855f4751051328681cde4c0.jpg" />
+                <figcaption>My temporary home</figcaption>
+            </figure>
+            <figure class="pic9">
+                <img src="http://suzannestackledotme.files.wordpress.com/2012/05/by-rustifari.jpg?w=700" />
+                <figcaption>Love</figcaption>
+            </figure>
+            <figure class="pic10">
+                <img src="https://33.media.tumblr.com/tumblr_lgidr1McXV1qdimp1o1_400.jpg" />
+                <figcaption>Torino 2013</figcaption>
+            </figure>
+            <figure class="pic11">
+                <img src="https://m1.behance.net/rendition/modules/4344109/disp/674ec054303b2c2e7e39527e2f8dd01b.jpg" />
+                <figcaption>Miss you..</figcaption>
+            </figure>
+        </div>
+    </div>
+</body>
+
+</html>
