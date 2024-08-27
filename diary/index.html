@@ -1,37 +1,12 @@
 <html>
 
 <head>
-    <!--
-    <link href='https://fonts.googleapis.com/css?family=Cedarville+Cursive' rel='stylesheet' type='text/css'>
--->
     <link rel="stylesheet" type="text/css" href="style.css" />
-
-    <style>
-        .shadow {
-            color: #fff;
-            font-family: dongdong;
-            font-weight: bold;
-            text-shadow: -3px -3px 0 #3343b1, 3px -3px 0 #3343b1, -3px 3px 0 #3343b1, 3px 3px 0 #3343b1, 4px 4px 0 #fff, 5px 5px 0 #fff, 6px 6px 0 #fff, 7px 7px 0 #fff;
-            line-height: 0.8em;
-            letter-spacing: 0.1em;
-            transform: scaleY(0.7);
-            -webkit-transform: scaleY(0.7);
-            -moz-transform: scaleY(0.7);
-            margin: 0;
-            text-align: center;
-        }
-
-        .text1 {
-            font-size: 60px;
-        }
-    </style>
-
-
 </head>
 
 <body>
     <div id="background">
-        <p class="shadow text1" style="margin-top: 5%;">지구별에 도착한 해인이 탄생 일기</p>
+        <p class="shadow-title">지구별에 도착한 해인이 탄생 일기</p>
 
         <div id="gallery"></div>
     </div>
@@ -51,7 +26,7 @@
             </figure>
                 `;
         }).join("");
-        
+
 
         // Get the modal
         var modal = document.getElementById("image-modal");
@@ -72,7 +47,7 @@
         });
 
         // 길이 구하기
-        window.onload = function() {
+        window.onload = function () {
             // 전체 문서의 높이 (스크롤 가능한 모든 영역을 포함한)
             var totalHeight = Math.max(
                 document.body.scrollHeight,
