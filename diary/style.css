@@ -34,7 +34,8 @@ div#gallery {
 
 #background img {
     /* height: 150px; */
-    height: 279px;
+    /* height: 279px; */
+    height: 409px;
     margin: 0px;
 }
 
@@ -63,7 +64,8 @@ figure.images {
 
 .clickable-image {
     /* width: 100px; */
-    width: 150px;
+    /* width: 150px; */
+    width: 220px;
     cursor: pointer;
     transition: transform 0.3s;
 }
