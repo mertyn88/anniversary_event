@@ -6,58 +6,42 @@
 -->
     <link rel="stylesheet" type="text/css" href="style.css" />
 
+    <style>
+        .shadow {
+            color: #fff;
+            font-family: Arvo;
+            font-weight: bold;
+            text-shadow:
+                -3px -3px 0 #222,
+                3px -3px 0 #222,
+                -3px 3px 0 #222,
+                3px 3px 0 #222,
+                4px 4px 0 #fff,
+                5px 5px 0 #fff,
+                6px 6px 0 #fff,
+                7px 7px 0 #fff;
+            line-height: 0.8em;
+            letter-spacing: 0.1em;
+            transform: scaleY(0.7);
+            -webkit-transform: scaleY(0.7);
+            -moz-transform: scaleY(0.7);
+            margin: 0;
+            text-align: center;
+        }
 
+        .text1 {
+            font-size: 60px;
+        }
     </style>
+
 
 </head>
 
 <body>
     <div id="background">
-        <div id="gallery">
-            <figure class="pic1">
-                <img class="clickable-image" src="images/test.jpg" />
-            </figure>
-            <figure class="pic2">
-                <img class="clickable-image" src="images/image_1.png" />
-                <figcaption>Death valley</figcaption>
-            </figure>
-            <figure class="pic3">
-                <img class="clickable-image" src="images/image_2.png" />
-                <figcaption>Early morning</figcaption>
-            </figure>
-            <figure class="pic4">
-                <img src="https://amp.businessinsider.com/images/507c71b8ecad048830000004-750-563.jpg" />
-                <figcaption>Lost.</figcaption>
-            </figure>
-            <figure class="pic5">
-                <img src="https://38.media.tumblr.com/tumblr_l8zzb3pezm1qdimp1o1_400.jpg" />
-                <figcaption>#Brooklyn</figcaption>
-            </figure>
-            <figure class="pic6">
-                <img src="http://www.adventure-journal.com/wp-content/uploads/2009/11/jackbrull01_470.jpg" />
-                <figcaption>Why now?</figcaption>
-            </figure>
-            <figure class="pic7">
-                <img src="http://www.webdesign.org/img_articles/22269/Sierra1.png" />
-                <figcaption>Verbier 10.08.2002</figcaption>
-            </figure>
-            <figure class="pic8">
-                <img src="http://media-cache-ak0.pinimg.com/236x/55/82/2d/55822d7c9855f4751051328681cde4c0.jpg" />
-                <figcaption>My temporary home</figcaption>
-            </figure>
-            <figure class="pic9">
-                <img src="http://suzannestackledotme.files.wordpress.com/2012/05/by-rustifari.jpg?w=700" />
-                <figcaption>Love</figcaption>
-            </figure>
-            <figure class="pic10">
-                <img src="https://33.media.tumblr.com/tumblr_lgidr1McXV1qdimp1o1_400.jpg" />
-                <figcaption>Torino 2013</figcaption>
-            </figure>
-            <figure class="pic11">
-                <img src="https://m1.behance.net/rendition/modules/4344109/disp/674ec054303b2c2e7e39527e2f8dd01b.jpg" />
-                <figcaption>Miss you..</figcaption>
-            </figure>
-        </div>
+        <p class="shadow text1">지구별에 도착한 해인이 탄생 일기</p>
+
+        <div id="gallery"></div>
     </div>
 
     <!-- Modal -->

@@ -5,6 +5,13 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'dongdong';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Dongdong.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     margin: 0px;
     font-family: 'BMJUA', Arial, sans-serif;
@@ -25,7 +32,8 @@ div#gallery {
 
 
 #background img {
-    height: 150px;
+    /* height: 150px; */
+    height: 279px;
     margin: 0px;
 }
 
@@ -51,66 +59,9 @@ figure.images {
     border-radius: 10px; 
 }
 
-figure.pic1 {
-    -webkit-transform: rotate(-10deg);
-    z-index: 1;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-}
-
-figure.pic2 {
-    -webkit-transform: rotate(15deg);
-    z-index: 1;
-}
-
-figure.pic3 {
-    -webkit-transform: rotate(-25deg);
-    z-index: 1;
-}
-
-figure.pic4 {
-    -webkit-transform: rotate(5deg);
-    z-index: 1;
-}
-
-figure.pic5 {
-    -webkit-transform: rotate(5deg);
-    z-index: 1;
-}
-
-figure.pic6 {
-    -webkit-transform: rotate(-8deg);
-    z-index: 1;
-}
-
-figure.pic7 {
-    -webkit-transform: rotate(2deg);
-    z-index: 1;
-}
-
-figure.pic8 {
-    -webkit-transform: rotate(-13deg);
-    z-index: 1;
-}
-
-figure.pic9 {
-    -webkit-transform: rotate(-7deg);
-    z-index: 1;
-}
-
-figure.pic10 {
-    -webkit-transform: rotate(2deg);
-    z-index: 1;
-}
-
-figure.pic11 {
-    -webkit-transform: rotate(-3deg);
-    z-index: 1;
-}
-
-
 .clickable-image {
-    width: 100px;
+    /* width: 100px; */
+    width: 150px;
     cursor: pointer;
     transition: transform 0.3s;
 }
@@ -180,3 +131,12 @@ figure.pic11 {
     }
 }
 
+
+.header-text {
+    line-height:1em;
+    color:#fff9d6;
+    font-style:italic;
+    font-size:134px;
+    text-shadow:0px 0px 0 rgb(235,235,235),1px 1px 0 rgb(225,225,225),2px 2px 0 rgb(215,215,215),3px 3px 0 rgb(206,206,206),4px 4px 0 rgb(196,196,196),5px 5px 0 rgb(186,186,186),6px 6px 0 rgb(176,176,176),7px 7px 0 rgb(166,166,166), 8px 8px 0 rgb(156,156,156),9px 9px 8px rgba(0,0,0,0.65),9px 9px 1px rgba(0,0,0,0.5),0px 0px 8px rgba(0,0,0,.2);
+}
+    
