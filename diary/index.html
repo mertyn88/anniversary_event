@@ -49,7 +49,7 @@
         <img class="modal-content" id="modal-image">
     </div>
 
-    <script src="./js/images.js"></script>
+    <script src="./js/images.js?v=20240827"></script>
     <script>
         document.getElementById("gallery").innerHTML = galleryData.map(function (data) {
             return `
@@ -59,7 +59,7 @@
             </figure>
                 `;
         }).join("");
-        // Math.floor(Math.random() * (25 - -25 + 1)) + -25
+        
 
         // Get the modal
         var modal = document.getElementById("image-modal");
@@ -72,8 +72,6 @@
             image.onclick = function () {
                 modal.style.display = "block";
                 modalImg.src = this.src;
-                console.log(this.src);
-                console.log(modalImg.src);
             }
         });
 
@@ -81,18 +79,24 @@
             modal.style.display = "none";
         });
 
-        /*
-        // -25부터 25까지의 난수 생성
-const min = -25;
-const max = 25;
+        // 길이 구하기
+        window.onload = function() {
+            // 전체 문서의 높이 (스크롤 가능한 모든 영역을 포함한)
+            var totalHeight = Math.max(
+                document.body.scrollHeight,
+                document.documentElement.scrollHeight,
+                document.body.offsetHeight,
+                document.documentElement.offsetHeight,
+                document.body.clientHeight,
+                document.documentElement.clientHeight
+            );
 
-// Math.random()은 0부터 1 사이의 난수를 생성합니다.
-// 이 값을 이용해 -25부터 25 사이의 난수를 생성합니다.
-const randomNum = Math.floor(Math.random() * (25 - -25 + 1)) + -25;
+            // 특정 id를 가진 요소 선택
+            var element = document.getElementById("background");
 
-console.log(randomNum);
-        */
-
+            // 요소의 height를 전체 문서의 height로 변경
+            element.style.height = totalHeight + "px";
+        };
     </script>
 </body>
 

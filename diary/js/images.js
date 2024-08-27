@@ -1,6 +1,6 @@
 const galleryData = [
 	{
-		caption: "2024년 8월 14일.<br>소중한 첫만남에서",
+		caption: "2024년 8월 14일",
 		photo: "images/2024_08_14.png"
 	},
 	{
@@ -20,7 +20,7 @@ const galleryData = [
 		photo: "images/2024_08_18.png"
 	},
 	{
-		caption: "Pangolin",
+		caption: "Location. 미즈제일여성병원",
 		photo: "images/2024_08_19.png"
 	},
 	{
@@ -46,5 +46,5 @@ const galleryData = [
 	{
 		caption: "Snake",
 		photo: "images/2024_08_25.png"
-	}
+	},
 ];

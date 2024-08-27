@@ -21,13 +21,14 @@ div#background {
     height: 100%;
     width: 100%;
     background-image: url(./background.jpg);
-    background-repeat: no-repeat;
+    background-repeat: repeat-y;;
     padding-top: 20px;
 }
 
 div#gallery {
     width: 800px;
     margin: auto;
+    margin-top: 10%;
 }
 
 
@@ -46,7 +47,8 @@ div#gallery {
     padding: 10px;
     margin: 10px;
     box-shadow: 1px 2px 3px black;
-    font-size: smaller;
+    font-size: small;
+    color: #6c6565;
 }
 
 #background figure figcaption {
@@ -119,6 +121,7 @@ figure.images {
 #caption {
     animation-name: zoom;
     animation-duration: 0.6s;
+    border-radius: 20px;
 }
 
 @keyframes zoom {
