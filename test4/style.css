@@ -1,28 +1,28 @@
 body {
     margin: 0px;
     font-family: 'Cedarville Cursive', cursive;
-  }
-  
-  div#background {
+}
+
+div#background {
     height: 100%;
     width: 100%;
     background-image: url(./images/background2.jpg);
     background-repeat: no-repeat;
     padding-top: 20px;
-  }
-  
-  div#gallery {
+}
+
+div#gallery {
     width: 800px;
     margin: auto;
-  }
-  
-  
-  #background img {
+}
+
+
+#background img {
     height: 150px;
     margin: 0px;
-  }
-  
-  #background figure {
+}
+
+#background figure {
     float: left;
     position: relative;
     background-color: white;
@@ -31,66 +31,141 @@ body {
     padding: 10px;
     margin: 10px;
     box-shadow: 1px 2px 3px black;
-  }
-  
-  figure.pic1 {
-    -webkit-transform : rotate(-10deg);
+}
+
+figure.pic1 {
+    -webkit-transform: rotate(-10deg);
     z-index: 1;
-  }
-  
-  figure.pic2 {
-    -webkit-transform : rotate(15deg);
-    z-index: 2;
-  }
-  
-  figure.pic3 {
-    -webkit-transform : rotate(-25deg);
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+figure.pic2 {
+    -webkit-transform: rotate(15deg);
     z-index: 1;
-  }
-  
-  figure.pic4 {
-    -webkit-transform : rotate(5deg);
-    z-index:1;
-  }
-  
-  figure.pic5 {
-    -webkit-transform : rotate(5deg);
-    z-index:1;
-  }
-  
-  figure.pic6 {
-    -webkit-transform : rotate(-8deg);
-    z-index:1;
-  }
-  
-  figure.pic7 {
-    -webkit-transform : rotate(2deg);
-    z-index:1;
-  }
-  
-  figure.pic8 {
-    -webkit-transform : rotate(-13deg);
-    z-index:1;
-  }
-  
-  figure.pic9 {
-    -webkit-transform : rotate(-7deg);
-    z-index:1;
-  }
-  
-  figure.pic10 {
-    -webkit-transform : rotate(2deg);
-    z-index:1;
-  }
-  
-  figure.pic11 {
-   -webkit-transform : rotate(-3deg);
-    z-index:1;
-  }
-  
-  #background figure:hover {
+}
+
+figure.pic3 {
+    -webkit-transform: rotate(-25deg);
+    z-index: 1;
+}
+
+figure.pic4 {
+    -webkit-transform: rotate(5deg);
+    z-index: 1;
+}
+
+figure.pic5 {
+    -webkit-transform: rotate(5deg);
+    z-index: 1;
+}
+
+figure.pic6 {
+    -webkit-transform: rotate(-8deg);
+    z-index: 1;
+}
+
+figure.pic7 {
+    -webkit-transform: rotate(2deg);
+    z-index: 1;
+}
+
+figure.pic8 {
+    -webkit-transform: rotate(-13deg);
+    z-index: 1;
+}
+
+figure.pic9 {
+    -webkit-transform: rotate(-7deg);
+    z-index: 1;
+}
+
+figure.pic10 {
+    -webkit-transform: rotate(2deg);
+    z-index: 1;
+}
+
+figure.pic11 {
+    -webkit-transform: rotate(-3deg);
+    z-index: 1;
+}
+
+/*
+#background figure:hover {
     box-shadow: 5px 10px 100px black;
-    -webkit-transform: scale(1.1,1.1);
+    -webkit-transform: scale(1.1, 1.1);
     z-index: 20;
-  }
-  
+}
+    */
+
+
+.clickable-image {
+    width: 100px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.clickable-image:hover {
+    transform: scale(1.1);
+}
+
+/* The Modal (background) */
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 60px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Black w/ opacity */
+}
+
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+/* Caption of Modal Image (optional) */
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+}
+
+/* Add Animation */
+.modal-content,
+#caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1)
+    }
+}
+

@@ -1,39 +1,29 @@
 <html>
 
 <head>
+    <!--
     <link href='https://fonts.googleapis.com/css?family=Cedarville+Cursive' rel='stylesheet' type='text/css'>
+-->
     <link rel="stylesheet" type="text/css" href="style.css" />
 
-    <script>
-        // 클래스 이름이 'zoomable-'로 시작하는 모든 요소를 선택합니다.
-        const zoomableImages = document.querySelectorAll('[class^="pic"]');
 
-        zoomableImages.forEach((img) => {
-            img.addEventListener('click', function () {
-                if (img.style.transform === 'scale(2)') {
-                    img.style.transform = 'scale(1)';
-                } else {
-                    img.style.transform = 'scale(2)';
-                }
-            });
-        });
-    </script>
+</style>
+
 </head>
 
 <body>
     <div id="background">
         <div id="gallery">
             <figure class="pic1">
-                <img src="images/test.jpg" />
-
+                <img class="clickable-image" src="images/test.jpg" />
             </figure>
             <figure class="pic2">
-                <img
+                <img class="clickable-image"
                     src="http://favim.com/orig/201107/03/art-desert-lo-fi-nature-neil-krug-photography-Favim.com-92907.jpg" />
                 <figcaption>Death valley</figcaption>
             </figure>
             <figure class="pic3">
-                <img
+                <img class="clickable-image"
                     src="http://cdn.c.photoshelter.com/img-get/I00003IZIy5yDWAE/s/880/880/Na-Mokulua-Five-Point-Sun-Rise.jpg" />
                 <figcaption>Early morning</figcaption>
             </figure>
@@ -71,6 +61,33 @@
             </figure>
         </div>
     </div>
+
+    <!-- Modal -->
+    <div id="image-modal" class="modal">
+        <img class="modal-content" id="modal-image">
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("image-modal");
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var modalImg = document.getElementById("modal-image");
+        var images = document.querySelectorAll(".clickable-image");
+
+        images.forEach(image => {
+            image.onclick = function () {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                console.log(this.src);
+                console.log(modalImg.src);
+            }
+        });
+
+        modal.addEventListener('click', function (event) {
+            modal.style.display = "none"; 
+        });
+    </script>
 </body>
 
 </html>
