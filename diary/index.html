@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
 
 
-</style>
+    </style>
 
 </head>
 
@@ -18,13 +18,11 @@
                 <img class="clickable-image" src="images/test.jpg" />
             </figure>
             <figure class="pic2">
-                <img class="clickable-image"
-                    src="http://favim.com/orig/201107/03/art-desert-lo-fi-nature-neil-krug-photography-Favim.com-92907.jpg" />
+                <img class="clickable-image" src="images/image_1.png" />
                 <figcaption>Death valley</figcaption>
             </figure>
             <figure class="pic3">
-                <img class="clickable-image"
-                    src="http://cdn.c.photoshelter.com/img-get/I00003IZIy5yDWAE/s/880/880/Na-Mokulua-Five-Point-Sun-Rise.jpg" />
+                <img class="clickable-image" src="images/image_2.png" />
                 <figcaption>Early morning</figcaption>
             </figure>
             <figure class="pic4">
@@ -67,7 +65,18 @@
         <img class="modal-content" id="modal-image">
     </div>
 
+    <script src="./js/images.js"></script>
     <script>
+        document.getElementById("gallery").innerHTML = galleryData.map(function (data) {
+            return `
+            <figure class="images" style="-webkit-transform: rotate(${Math.floor(Math.random() * (25 - -25 + 1)) + -25}deg);">
+                <img class="clickable-image" src="${data.photo}" />
+                <figcaption>${data.caption}</figcaption>
+            </figure>
+                `;
+        }).join("");
+        // Math.floor(Math.random() * (25 - -25 + 1)) + -25
+
         // Get the modal
         var modal = document.getElementById("image-modal");
 
@@ -85,8 +94,21 @@
         });
 
         modal.addEventListener('click', function (event) {
-            modal.style.display = "none"; 
+            modal.style.display = "none";
         });
+
+        /*
+        // -25부터 25까지의 난수 생성
+const min = -25;
+const max = 25;
+
+// Math.random()은 0부터 1 사이의 난수를 생성합니다.
+// 이 값을 이용해 -25부터 25 사이의 난수를 생성합니다.
+const randomNum = Math.floor(Math.random() * (25 - -25 + 1)) + -25;
+
+console.log(randomNum);
+        */
+
     </script>
 </body>
 

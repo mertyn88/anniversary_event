@@ -1,12 +1,19 @@
+@font-face {
+    font-family: 'BMJUA';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     margin: 0px;
-    font-family: 'Cedarville Cursive', cursive;
+    font-family: 'BMJUA', Arial, sans-serif;
 }
 
 div#background {
     height: 100%;
     width: 100%;
-    background-image: url(./images/background2.jpg);
+    background-image: url(./background.jpg);
     background-repeat: no-repeat;
     padding-top: 20px;
 }
@@ -31,6 +38,17 @@ div#gallery {
     padding: 10px;
     margin: 10px;
     box-shadow: 1px 2px 3px black;
+    font-size: smaller;
+}
+
+#background figure figcaption {
+    text-align: left;
+}
+
+figure.images {
+    z-index: 1;
+    border: 1px solid white;
+    border-radius: 10px; 
 }
 
 figure.pic1 {
@@ -90,14 +108,6 @@ figure.pic11 {
     z-index: 1;
 }
 
-/*
-#background figure:hover {
-    box-shadow: 5px 10px 100px black;
-    -webkit-transform: scale(1.1, 1.1);
-    z-index: 20;
-}
-    */
-
 
 .clickable-image {
     width: 100px;
@@ -139,6 +149,7 @@ figure.pic11 {
     display: block;
     width: 80%;
     max-width: 700px;
+    margin-top: 10%;
 }
 
 /* Caption of Modal Image (optional) */
