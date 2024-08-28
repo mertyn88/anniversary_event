@@ -120,7 +120,7 @@ figure.images {
 }
 
 /* Add Animation */
-.modal-content,
+.modal-content, .modal-figure,
 #caption {
     animation-name: zoom;
     animation-duration: 0.6s;
@@ -152,4 +152,14 @@ figure.images {
     text-align: center;
     font-size: 60px;
     margin-top: 5%;
+}
+
+.modal-figure {
+    background-color: white;
+    padding: 5px;
+    text-align: center;
+    font-size: xx-large;
+    border-radius: 20px;
+    margin-inline-start: 70px;
+    margin-inline-end: 70px;
 }

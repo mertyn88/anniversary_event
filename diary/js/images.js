@@ -44,7 +44,7 @@ const galleryData = [
 		photo: "images/2024_08_24.png"
 	},
 	{
-		caption: "Snake<br>text",
+		caption: "2024년 8월 25일.<br>여러 표정을 짓는 해인이",
 		photo: "images/2024_08_25.png"
 	}
 ];

@@ -13,16 +13,19 @@
 
     <!-- Modal -->
     <div id="image-modal" class="modal">
-        <img class="modal-content" id="modal-image">
+        <figure class="modal-figure">
+            <img class="modal-content" id="modal-image">
+            <figcaption id="model-text">test</figcaption>
+        </figure>
     </div>
 
     <script src="./js/images.js?v=20240827"></script>
     <script>
-        document.getElementById("gallery").innerHTML = galleryData.map(function (data) {
+        document.getElementById("gallery").innerHTML = galleryData.map(function (data, index) {
             return `
             <figure class="images" style="-webkit-transform: rotate(${Math.floor(Math.random() * (25 - -25 + 1)) + -25}deg);">
-                <img class="clickable-image" src="${data.photo}" />
-                <figcaption>${data.caption}</figcaption>
+                <img id="img_${index}" class="clickable-image" src="${data.photo}" />
+                <figcaption id="fig_${index}">${data.caption}</figcaption>
             </figure>
                 `;
         }).join("");
@@ -39,6 +42,13 @@
             image.onclick = function () {
                 modal.style.display = "block";
                 modalImg.src = this.src;
+
+                // Get text
+                target_index = this.id.split("_")[1];
+                target_text = document.getElementById("fig_" + target_index).textContent;
+                
+                document.getElementById("model-text").textContent = target_text;
+
             }
         });
 
