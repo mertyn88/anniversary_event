@@ -162,4 +162,9 @@ figure.images {
     border-radius: 20px;
     margin-inline-start: 70px;
     margin-inline-end: 70px;
+
+    width: 80% !important;
+    height: 70% !important;
 }
+
+
