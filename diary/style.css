@@ -21,7 +21,7 @@ div#background {
     height: 100%;
     width: 100%;
     background-image: url(./background.jpg);
-    background-repeat: repeat-y;
+    background-repeat: repeat;
     ;
     padding-top: 20px;
 }
