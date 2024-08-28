@@ -2,30 +2,9 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/js/swiper.js"></script>
-
-    <style>
-
-    </style>
-
 </head>
 
 <body>
-
-
-
-    <div id="image-swiper" class="swiper-container modal">
-        <div id="image-wrapper" class="swiper-wrapper">
-
-        </div>
-        
-
-        <!-- pagination dots -->
-        <div class="swiper-pagination"></div>
-    </div>
-
-
     <div id="background">
         <p class="shadow-title">지구별에 도착한 해인이 탄생 일기</p>
 
@@ -36,7 +15,7 @@
     <div id="image-modal" class="modal">
         <figure class="modal-figure">
             <img class="modal-content" id="modal-image">
-            <figcaption id="model-text"></figcaption>
+            <figcaption id="model-text" style="color: #6c6565;"></figcaption>
         </figure>
     </div>
 
@@ -47,23 +26,14 @@
             return `
             <figure class="images" style="-webkit-transform: rotate(${Math.floor(Math.random() * (25 - -25 + 1)) + -25}deg);">
                 <img id="img_${index}" class="clickable-image" src="${data.photo}" />
-                <figcaption id="fig_${index}">${data.caption}</figcaption>
-            </figure>
-                `;
-        }).join("");
-
-        document.getElementById("image-wrapper").innerHTML = galleryData.map(function (data, index) {
-            return `
-            <figure class="swiper-slide modal-figure" >
-                <img class="modal-content" src="${data.photo}" />
-                <figcaption>${data.caption}</figcaption>
+                <figcaption>${data.date}</figcaption>
             </figure>
                 `;
         }).join("");
 
 
         // Get the modal
-        var modal = document.getElementById("image-swiper");
+        var modal = document.getElementById("image-modal");
 
         // Get the image and insert it inside the modal - use its "alt" text as a caption
         var modalImg = document.getElementById("modal-image");
@@ -73,20 +43,16 @@
             image.onclick = function () {
                 modal.style.display = "block";
                 modalImg.src = this.src;
-
                 // Get text
                 target_index = this.id.split("_")[1];
-                target_text = document.getElementById("fig_" + target_index).textContent;
-
-                document.getElementById("model-text").textContent = target_text;
-
+                document.getElementById("model-text").textContent = galleryData[target_index].caption;
             }
         });
 
         modal.addEventListener('click', function (event) {
             modal.style.display = "none";
         });
-        
+
         // 길이 구하기
         window.onload = function () {
             // 전체 문서의 높이 (스크롤 가능한 모든 영역을 포함한)
@@ -104,16 +70,6 @@
 
             // 요소의 height를 전체 문서의 height로 변경
             element.style.height = totalHeight + "px";
-
-
-            var Swipes = new Swiper('.swiper-container', {
-                loop: true,
-                
-                pagination: {
-                    el: '.swiper-pagination',
-                },
-                effect: 'slide', // 페이드 효과
-            });
         };
     </script>
 </body>

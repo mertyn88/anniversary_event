@@ -54,7 +54,8 @@ div#gallery {
 }
 
 #background figure figcaption {
-    text-align: left;
+    text-align: center;
+    font-family: dongdong;
 }
 
 figure.images {
@@ -83,7 +84,7 @@ figure.images {
     /* Stay in place */
     z-index: 1;
     /* Sit on top */
-    padding-top: 60px;
+    padding-top: 2%;
     /* Location of the box */
     left: 0;
     top: 0;
@@ -99,14 +100,7 @@ figure.images {
     /* Black w/ opacity */
 }
 
-/* Modal Content (image) */
-.modal-content {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-    margin-top: 10%;
-}
+
 
 /* Caption of Modal Image (optional) */
 #caption {
@@ -120,7 +114,7 @@ figure.images {
 }
 
 /* Add Animation */
-.modal-content, .modal-figure,
+.modal-content,
 #caption {
     animation-name: zoom;
     animation-duration: 0.6s;
@@ -140,7 +134,7 @@ figure.images {
 
 .shadow-title {
     color: #fff;
-    font-family: dongdong;
+    font-family: BMJUA;
     font-weight: bold;
     text-shadow: -3px -3px 0 #3343b1, 3px -3px 0 #3343b1, -3px 3px 0 #3343b1, 3px 3px 0 #3343b1, 4px 4px 0 #fff, 5px 5px 0 #fff, 6px 6px 0 #fff, 7px 7px 0 #fff;
     line-height: 0.8em;
@@ -160,11 +154,19 @@ figure.images {
     text-align: center;
     font-size: xx-large;
     border-radius: 20px;
-    margin-inline-start: 70px;
-    margin-inline-end: 70px;
+    margin-inline-start: 15%;
+    /* margin-inline-end: 70px; */
 
-    width: 80% !important;
-    height: 70% !important;
+    width: 70% !important;
+    /* height: 70% !important; */
 }
 
-
+/* Modal Content (image) */
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 92%;
+    max-width: 700px;
+    padding-top: 4%;
+    /*margin-top: 10%;*/
+}
