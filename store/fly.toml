@@ -1,0 +1,29 @@
+# fly.toml app configuration file generated for liam-database on 2024-09-02T08:49:52+09:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'liam-database'
+primary_region = 'nrt'
+
+[build]
+  image = 'couchdb:3.3.2'
+
+[http_service]
+  internal_port = 5984
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = false
+  min_machines_running = 0
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+[env]
+  COUCHDB_USER = "liam"
+[mounts]
+  source="couchdata"
+  destination="/opt/couchdb/data"
