@@ -5,7 +5,7 @@
     <title>Sqlite Board</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/jquery-2.0.3.min.js"></script>
+    <script src="js/jquery-2.0.3.min.js"></script>
     <style>
         body {
             margin: 10px;
@@ -106,13 +106,47 @@
     <div id="boardlist" class="boardlist">list</div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/sql-wasm.js"></script>
     <script>
-        initSqlJs().then(function (SQL) {
-            const db = new SQL.Database();
-            db.run("CREATE TABLE test (col1, col2);");
-            db.run("INSERT INTO test VALUES (?, ?), (?, ?);", [1, 111, 2, 222]);
-            const res = db.exec("SELECT * FROM test;");
-            console.log(res);
-        });
+        const databaseId = prompt("Enter your ID:", "");
+        const databasePw = prompt("Enter your Password:", "");
+        const databaseNm = prompt("Enter your Database:", "");
+        const databaseUrl = `https://${databaseNm}-database.fly.dev/netlify-store`
+
+        const date = new Date();
+        const today = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+
+        const credentials = btoa(`${databaseId}:${databasePw}`);
+        console.log(credentials);
+        fetch(`${databaseUrl}/_find`, {
+            method: "POST",
+            headers: {
+                'Authorization': `Basic ${credentials}`
+            },
+            body: {
+                "selector": {
+                    "$and": [
+                        {
+                            "date": "20240904"
+                        }
+                    ]
+                },
+                "fields": [
+                    "number",
+                    "date"
+                ],
+                "sort": [
+                    {
+                        "number": "desc"
+                    }
+                ],
+                "limit": 1
+            },
+        })
+            .then((response) => response.json())
+            .then((result) => console.log(result));
+
+
+
+
     </script>
 
 
@@ -122,7 +156,7 @@
         var dataset;
 
         $(document).ready(function () {
-            initDatabase();
+            // initDatabase();
 
             // 입력
             $("#btn_insert").click(function () {
