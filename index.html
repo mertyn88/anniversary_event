@@ -1,7 +1,64 @@
-<html>
-    <body>
-        <a href="/birthday/index.html">다영이 생일 이벤트</a><br>
-        <a href="/album/index.html">해인이 탄생 앨범</a><br>
-        <a href="/store/img_to_string.html">이미지 업로드 테스트</a>
-    </body>
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>링크 모음</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+
+            /* 그라디언트 배경 */
+            height: 1300px;
+        }
+
+        .button-link {
+            display: block;
+            width: 90%;
+            max-width: 600px;
+            /* 최대 너비 설정 */
+            margin: 20px auto;
+            /* 중앙 정렬 및 상하 여백 추가 */
+            padding: 15px;
+            font-size: 1.2rem;
+            /* 글자 크기 */
+            color: #090973;
+            background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+            /* 버튼 그라디언트 효과 */
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: transform 0.3s ease, background-image 0.3s ease;
+        }
+
+        .button-link:hover {
+            background-image: linear-gradient(45deg, #e048d9, #4e8dea);
+            transform: translateY(-2px);
+        }
+
+        .button-link:active {
+            transform: translateY(1px);
+        }
+
+        /* 모바일 화면 크기에 따른 글자 크기 조정 */
+        @media (max-width: 768px) {
+            .button-link {
+                font-size: 1.5rem;
+                /* 작은 화면 글자 크기 */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <a class="button-link" href="/birthday/index.html">다영이 생일 이벤트</a>
+        <a class="button-link" href="/album/index.html">해인이 탄생 앨범</a>
+        <a class="button-link" href="/store/img_to_string.html">이미지 업로드 테스트</a>
+    </div>
+
+</body>
+
 </html>
