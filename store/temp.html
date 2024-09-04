@@ -17,6 +17,15 @@
 </body>
 
 <script>
+
+    // 지원여부확인
+    if (!window.indexedDB) {
+        window.alert("browser doesn't support IndexedDB");
+    } else {
+        window.alert('지원');
+    }
+
+
     const databasePrefix = prompt("Enter your prefix:", "");
     const databaseUrl = `https://${databasePrefix}-database.fly.dev/netlify-store`
 
