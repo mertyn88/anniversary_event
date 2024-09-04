@@ -115,13 +115,50 @@
         const today = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 
         const credentials = btoa(`${databaseId}:${databasePw}`);
-        console.log(credentials);
+
+        async function test() {
+            const response = await fetch(`${databaseUrl}/_find`, {
+                method: "POST",
+                headers: {
+                    'Authorization': `Basic ${credentials}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "selector": {
+                        "$and": [
+                            {
+                                "date": "20240904"
+                            }
+                        ]
+                    },
+                    "fields": [
+                        "number",
+                        "date"
+                    ],
+                    "sort": [
+                        {
+                            "number": "desc"
+                        }
+                    ],
+                    "limit": 1
+                }),
+            });
+            return response.json();
+        }
+
+        (async () => {
+            let tete = await test();
+            console.log(tete['docs'][0]['number']);
+        })();
+
+
         fetch(`${databaseUrl}/_find`, {
             method: "POST",
             headers: {
-                'Authorization': `Basic ${credentials}`
+                'Authorization': `Basic ${credentials}`,
+                'Content-Type': 'application/json'
             },
-            body: {
+            body: JSON.stringify({
                 "selector": {
                     "$and": [
                         {
@@ -139,11 +176,16 @@
                     }
                 ],
                 "limit": 1
-            },
+            }),
         })
-            .then((response) => response.json())
-            .then((result) => console.log(result));
+            .then((response) => {
+                return response.json()
+            })
+            .then(data => {
+                console.log(data);
+            })
 
+            ;
 
 
 
