@@ -17,16 +17,29 @@
 </body>
 
 <script>
-    const databaseId = prompt("Enter your ID:", "");
-    const databasePw = prompt("Enter your Password:", "");
-    const databaseNm = prompt("Enter your Database:", "");
-    const databaseUrl = `https://${databaseNm}-database.fly.dev/netlify-store`
+    const databasePrefix = prompt("Enter your prefix:", "");
+    const databaseUrl = `https://${databasePrefix}-database.fly.dev/netlify-store`
 
     const date = new Date();
     const today = `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}`;
     console.log(today);
 
-    const credentials = btoa(`${databaseId}:${databasePw}`);
+    const credentials = btoa(`${databasePrefix}:${databasePrefix}`);
+
+
+    const selectAllQuery = {
+        "selector": {},
+        "fields": [
+            "number",
+            "date",
+            "encode"
+        ],
+        "sort": [
+            {
+                "number": "asc"
+            }
+        ]
+    }
 
     const exsitQuery = {
         "selector": {
@@ -52,7 +65,10 @@
         "date": today,
         "number": 0,
         "encode": ''
-    }
+    };
+
+
+
 
 
     document.getElementById('uploadButton').addEventListener('click', function () {
@@ -91,7 +107,7 @@
 
 
                 insertQuery['number'] = docIndex;
-                insertQuery['encode'] = decompressedString;
+                insertQuery['encode'] = compressedBase64;
                 response = await insertDocument(insertQuery);
             })();
 
@@ -117,6 +133,11 @@
         return response.json();
     };
 
+    async function selectAllDocument(selectQuery) {
+        const response = await fetchRequest('_find', selectQuery);
+        return response;
+    }
+
 
     async function existDocument(exsitQuery) {
         const response = await fetchRequest('_find', exsitQuery);
@@ -130,6 +151,13 @@
     }
 
 
+    (async () => {
+        console.log('1');
+        let response = await selectAllDocument(selectAllQuery);
+        console.log(response);
+        //console.log(response['docs'][0]['encode']);
+        document.getElementById('print_image').src = decompressBase64ToString(response['docs'][0]['encode']);
+    })();
 
 
 
