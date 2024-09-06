@@ -9,8 +9,12 @@ const query = {
             }
         },
         "fields": [
+            "date",
+            "title",
+            "content",
+            "primary",
             "number",
-            "date"
+            "encode"
         ],
         "sort": [
             {
@@ -38,7 +42,10 @@ const query = {
         "limit": 1
     },
     "insert": {
-        "date": today,
+        "date": today, //내부 삽입 날짜
+        "title": '',
+        "content": '',
+        "primary": '',
         "number": 0,
         "encode": ''
     }
@@ -59,16 +66,16 @@ const fetchRequest = async (event, query) => {
 };
 
 async function selectCouchDB() {
-    const response = await fetchRequest('_find',  query['select']);
+    const response = await fetchRequest('_find', query['select']);
     return response;
 }
 
 async function existCouchDB() {
-    const response = await fetchRequest('_find',  query['exist']);
+    const response = await fetchRequest('_find', query['exist']);
     return response;
 }
 
 async function insertCouchDB() {
-    const response = await fetchRequest('',  query['insert']);
+    const response = await fetchRequest('', query['insert']);
     return response;
 }

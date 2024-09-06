@@ -18,15 +18,20 @@
 
             // 변수 할당
             query['select']['selector']['primary']['$nin'] = primaryKeys;
-            console.log(JSON.stringify(query['select']));
-            
             response = await selectCouchDB();
             console.log(response['docs']);
+
+            // indexeddb에 할당 처리
+            if (response['docs'].length > 0) {
+                writeIndexedDB(response['docs']);
+            }
         })();
 
 
         selectAllIndexedDB().then((data) => {
             console.log("IndexedDB 데이터:", data);
+            
+
 
 
 
