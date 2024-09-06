@@ -110,13 +110,6 @@
                 insertQuery['encode'] = compressedBase64;
                 response = await insertDocument(insertQuery);
             })();
-
-
-
-
-
-
-
         });
     });
 
@@ -153,6 +146,7 @@
 
     (async () => {
         console.log('1');
+        console.log(selectAllQuery);
         let response = await selectAllDocument(selectAllQuery);
         console.log(response);
         //console.log(response['docs'][0]['encode']);

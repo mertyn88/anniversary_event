@@ -2,12 +2,15 @@ const date = new Date();
 const today = `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}`;
 
 const query = {
-    "selectAll": {
-        "selector": {},
+    "select": {
+        "selector": {
+            "primary": {
+                "$nin": []
+            }
+        },
         "fields": [
             "number",
-            "date",
-            "encode"
+            "date"
         ],
         "sort": [
             {
@@ -43,6 +46,7 @@ const query = {
 
 
 const fetchRequest = async (event, query) => {
+    const credentials = btoa(`${databasePrefix}:${databasePrefix}`);
     const response = await fetch(`${databaseUrl}/${event}`, {
         method: "POST",
         headers: {
@@ -54,18 +58,17 @@ const fetchRequest = async (event, query) => {
     return response.json();
 };
 
-async function selectAllDocument(selectQuery) {
-    const response = await fetchRequest('_find', selectQuery);
+async function selectCouchDB() {
+    const response = await fetchRequest('_find',  query['select']);
     return response;
 }
 
-async function existDocument(exsitQuery) {
-    const response = await fetchRequest('_find', exsitQuery);
+async function existCouchDB() {
+    const response = await fetchRequest('_find',  query['exist']);
     return response;
 }
 
-async function insertDocument(insertQuery) {
-    console.log(insertQuery);
-    const response = await fetchRequest('', insertQuery);
+async function insertCouchDB() {
+    const response = await fetchRequest('',  query['insert']);
     return response;
 }
