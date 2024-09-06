@@ -22,6 +22,7 @@
 
     const date = new Date();
     const today = `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}`;
+    const todayStr = `${date.getFullYear()}년 ${String(date.getMonth() + 1).padStart(2, '0')}월 ${String(date.getDate()).padStart(2, '0')}일`
     console.log(today);
 
     const credentials = btoa(`${databasePrefix}:${databasePrefix}`);
@@ -62,7 +63,10 @@
     };
 
     const insertQuery = {
-        "date": today,
+        "date": today, //내부 삽입 날짜
+        "title": '',
+        "content": '',
+        "primary": '',
         "number": 0,
         "encode": ''
     };
@@ -103,9 +107,9 @@
                     docIndex = Number(response['docs'][0]['number']) + 1;
                 }
 
-
-
-
+                insertQuery['title'] = todayStr;
+                //insertQuery['content'] = '';
+                insertQuery['primary'] = `${today}_${docIndex}`
                 insertQuery['number'] = docIndex;
                 insertQuery['encode'] = compressedBase64;
                 response = await insertDocument(insertQuery);
