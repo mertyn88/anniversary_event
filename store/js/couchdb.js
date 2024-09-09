@@ -43,11 +43,11 @@ const query = {
     },
     "insert": {
         "date": today, //내부 삽입 날짜
-        "title": '',
-        "content": '',
-        "primary": '',
+        "tag": "",
+        "caption": "",
+        "primary": "",
         "number": 0,
-        "encode": ''
+        "encode": ""
     }
 };
 

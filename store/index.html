@@ -5,7 +5,20 @@
     <title>Hein Album Board</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="js/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="js/pako.min.js"></script>
+    <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+    <script>
+        const databasePrefix = prompt("Enter your prefix:", "");
+        const databaseUrl = `https://${databasePrefix}-database.fly.dev/netlify-store`;
+    </script>
+    <script text="text/javascript" src="js/indexeddb.js"></script>
+    <script text="text/javascript" src="js/couchdb.js"></script>
+    <script text="text/javascript" src="js/image.js"></script>
+    <script>
+
+
+
+    </script>
     <style>
         body {
             margin: 10px;
@@ -26,7 +39,7 @@
         .btn,
         .btn_edit,
         .btn_delete {
-            width: 50px;
+            width: 70px;
             cursor: pointer;
             display: inline-block;
             background: #3498db;
@@ -77,26 +90,29 @@
 
 <body>
     <div id="form">
-        <h1>Sqlite Board</h1>
+        <h1>Board manage</h1>
         <form id="mycontact">
             <input id="id" type="hidden" value="" />
             <fieldset>
                 <legend>게시판</legend>
                 <ol id="list">
                     <li>
-                        <label for="username">이름: </label>
-                        <input id="username" type="text" placeholder="name..." required autofocus>
+                        <label for="tag">태그: </label>
+                        <input id="input_tag" type="text" placeholder="tag..." required autofocus>
                     </li>
                     <li>
-                        <label for="content">내용: </label>
-                        <input id="content" type="text" placeholder="write..." required>
+                        <label for="caption">내용: </label>
+                        <input id="input_caption" type="text" placeholder="caption..." required>
                     </li>
                 </ol>
             </fieldset>
 
             <div class="btn_set">
+                <input type="file" id="image_input" multiple><br>
+                <span id="btn_insert" class="btn">이미지 업로드</span>
+
+
                 <span id="btn_reset" class="btn">글지우기</span>
-                <span id="btn_insert" class="btn">글쓰기</span>
                 <span id="btn_update" class="btn">글수정</span>
                 <span id="btn_drop" class="btn">DB삭제</span>
             </div>
@@ -104,104 +120,41 @@
     </div>
     <br />
     <div id="boardlist" class="boardlist">list</div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.5.0/sql-wasm.js"></script>
     <script>
-        const databaseId = prompt("Enter your ID:", "");
-        const databasePw = prompt("Enter your Password:", "");
-        const databaseNm = prompt("Enter your Database:", "");
-        const databaseUrl = `https://${databaseNm}-database.fly.dev/netlify-store`
-
-        const date = new Date();
-        const today = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-
-        const credentials = btoa(`${databaseId}:${databasePw}`);
-
-        async function test() {
-            const response = await fetch(`${databaseUrl}/_find`, {
-                method: "POST",
-                headers: {
-                    'Authorization': `Basic ${credentials}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "selector": {
-                        "$and": [
-                            {
-                                "date": "20240904"
-                            }
-                        ]
-                    },
-                    "fields": [
-                        "number",
-                        "date"
-                    ],
-                    "sort": [
-                        {
-                            "number": "desc"
-                        }
-                    ],
-                    "limit": 1
-                }),
-            });
-            return response.json();
-        }
-
-        (async () => {
-            let tete = await test();
-            console.log(tete['docs'][0]['number']);
-        })();
-
-
-        fetch(`${databaseUrl}/_find`, {
-            method: "POST",
-            headers: {
-                'Authorization': `Basic ${credentials}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                "selector": {
-                    "$and": [
-                        {
-                            "date": "20240904"
-                        }
-                    ]
-                },
-                "fields": [
-                    "number",
-                    "date"
-                ],
-                "sort": [
-                    {
-                        "number": "desc"
-                    }
-                ],
-                "limit": 1
-            }),
-        })
-            .then((response) => {
-                return response.json()
-            })
-            .then(data => {
-                console.log(data);
-            })
-
-            ;
-
-
-
-    </script>
-
-
-
-    <script>
-        var systemDB;
-        var dataset;
-
         $(document).ready(function () {
-            // initDatabase();
-
             // 입력
             $("#btn_insert").click(function () {
+                const fileInput = document.getElementById('image_input');
+                const files = fileInput.files;
+
+                if (files.length === 0) {
+                    alert('Please select at least one file.');
+                    return;
+                }
+
+                encodeImagesToBase64(files).then(encodedImages => {
+                    let compressedBase64 = compressStringToBase64(encodedImages);
+                    (async () => {
+                        let response = await existCouchDB();
+                        let docIndex = 1;
+
+                        // 인덱스 숫자 부여
+                        if (response['docs'].length > 0) {
+                            docIndex = Number(response['docs'][0]['number']) + 1;
+                        }
+
+                        query['insert']['tag'] = $('#input_tag').val();
+                        query['insert']['caption'] = $('#input_caption').val();
+                        query['insert']['primary'] = `${today}_${docIndex}`
+                        query['insert']['number'] = docIndex;
+                        query['insert']['encode'] = compressedBase64;
+                        response = await insertCouchDB();
+                        console.log(response);
+                        alert('업로드 완료');
+                    })();
+                });
+
+
                 insertDB(systemDB);
             });
 
@@ -234,149 +187,7 @@
             $("#btn_reset").click(resetForm);
         });
 
-        // 테이블 삭제
-        function dropTable(db) {
-            if (!confirm("테이블을 삭제를 하겠습니까?")) {
-                return;
-            }
 
-            var strSql = "DROP TABLE tbl_board";
-            db.transaction(function (tx) {
-                tx.executeSql(strSql, [], loadAndReset, errorHandler);
-            });
-            resetForm();
-            initDatabase();
-        }
-
-        // 삭제
-        function deleteDB(db, idx) {
-            if (Number(idx) <= 0) {
-                alert("삭제할 글을 선택해주세요.");
-                return;
-            }
-
-            if (!confirm("삭제를 하겠습니까?")) {
-                return;
-            }
-
-            var strSql = "DELETE FROM tbl_board WHERE idx=?";
-            db.transaction(function (tx) {
-                tx.executeSql(strSql, [Number(idx)], loadAndReset, errorHandler);
-            });
-        }
-
-        function updateDB(db) {
-            var strSql = "UPDATE tbl_board SET username = ?, content = ? WHERE idx = ?";
-            var username = $('#username').val().trim();
-            var content = $('#content').val().trim();
-            var idx = $("#id").val();
-
-            if (username === "" || content === "" || Number(idx) <= 0) {
-                alert("글을 적어주세요.");
-                $('#username').focus();
-                return;
-            }
-
-            db.transaction(function (tx) {
-                tx.executeSql(strSql, [username, content, Number(idx)], loadAndReset, errorHandler);
-            });
-        }
-
-        function loadRecord(no) {
-            var item = dataset.item(no);
-            $("#username").val((item['username']).toString());
-            $("#content").val((item['content']).toString());
-        }
-
-        function initDatabase() {
-            if (!window.openDatabase) {
-                alert("현재 브라우저는 Web SQL Database를 지원하지 않습니다");
-            } else {
-                var shortName = 'Board1';
-                var version = '1.0';
-                var displayName = 'Board DB';
-                var maxSize = 1024 * 64; // in bytes
-                var db = openDatabase(shortName, version, displayName, maxSize);
-            }
-
-            createTable(db);
-            selectAllList(db);
-            systemDB = db;
-        }
-
-        function insertDB(db) {
-            var strSql = "INSERT INTO tbl_board (username, content) VALUES (?, ?)";
-            var username = $('#username').val().trim();
-            var content = $('#content').val().trim();
-
-            if (username === "" || content === "") {
-                alert("글을 적어주세요.");
-                $('#username').focus();
-                return;
-            }
-
-            db.transaction(function (tx) {
-                tx.executeSql(strSql, [username, content], loadAndReset, errorHandler);
-            });
-        }
-
-        function loadAndReset() {
-            resetForm();
-            selectAllList(systemDB);
-        }
-
-        function resetForm() {
-            $("#username").val("");
-            $("#content").val("");
-        }
-
-        function errorHandler(error) {
-            alert('Error: ' + error.message + ' (Code ' + error.code + ')');
-        }
-
-        function selectAllList(db) {
-            var strSql = "SELECT * FROM tbl_board order by idx desc";
-            $("#boardlist").html('');
-            db.transaction(function (tx) {
-                tx.executeSql(strSql, [], function (tx, result) {
-                    dataset = result.rows;
-                    var str = "<ol>";
-                    if (dataset.length > 0) {
-                        for (var i = 0, item = null; i < dataset.length; i++) {
-                            item = dataset.item(i);
-                            str += "<li>" + item['username'] + " : " + item['content'] + " : " + item['regdate']
-                                + " <span class='btn_edit' data-no='" + i + "' data-idx='" + item['idx'] + "'>edit</span>"
-                                + " <span class='btn_delete' data-no='" + i + "' data-idx='" + item['idx'] + "'>delete</span>"
-                                + "</li>";
-                        }
-                    } else {
-                        str += "리스트가 없습니다.";
-                    }
-                    str += "</ol>";
-                    $("#boardlist").html(str);
-                });
-            });
-        }
-
-        function createTable(db) {
-            var strCreate = "CREATE TABLE IF NOT EXISTS tbl_board"
-                + " (idx INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,"
-                + " username TEXT NOT NULL,"
-                + " content TEXT NOT NULL,"
-                + " regdate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP)";
-            db.transaction(function (tx) {
-                tx.executeSql(strCreate);
-            });
-        }
-
-
-        function insertTestDB(db) {
-            db.transaction(function (tx) {
-                tx.executeSql("INSERT INTO tbl_board(username, content) values('test', '1번째 글입니다.')");
-                tx.executeSql("INSERT INTO tbl_board(username, content) values('test', '2번째 글입니다.')");
-                tx.executeSql("INSERT INTO tbl_board(username, content) values('test', '3번째 글입니다.')");
-            });
-        }
     </script>
 </body>
 
