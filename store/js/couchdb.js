@@ -10,15 +10,18 @@ const query = {
         },
         "fields": [
             "date",
-            "title",
-            "content",
+            "tag",
+            "caption",
             "primary",
             "number",
             "encode"
         ],
         "sort": [
             {
-                "number": "asc"
+                "date": "desc"
+            },
+            {
+                "number": "desc"
             }
         ]
     },
