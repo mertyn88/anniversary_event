@@ -14,6 +14,7 @@
     <script text="text/javascript" src="js/indexeddb.js"></script>
     <script text="text/javascript" src="js/couchdb.js"></script>
     <script text="text/javascript" src="js/image.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <script>
 
 
@@ -27,26 +28,29 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-    
+
         #form {
             background: #FFF;
             border-radius: 10px;
             margin: 10px;
             padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
             font-size: 16px;
         }
-    
+
         .boardlist {
             background: #FFF;
             border-radius: 10px;
             margin: 10px;
             padding: 5px;
-            box-shadow: 0 2px 4px rgba(0,0,0,.2);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
             font-size: 16px;
         }
-    
-        #list, .boardlist ol li, #listTable thead th, #listTable tbody td {
+
+        #list,
+        .boardlist ol li,
+        #listTable thead th,
+        #listTable tbody td {
             margin-top: 5px;
             margin-bottom: 5px;
         }
@@ -54,13 +58,13 @@
         ol li {
             display: inline;
         }
-    
+
         #listTable {
             width: calc(100% - 20px);
             border-collapse: collapse;
             margin-top: 0;
         }
-    
+
         #listTable thead th {
             padding: 15px;
             background-color: #3498db;
@@ -68,18 +72,18 @@
             font-size: 18px;
             border-bottom: 2px solid #2980b9;
         }
-    
+
         #listTable tbody td {
             padding: 15px;
             background: #FFF;
             border-bottom: 1px solid #ddd;
             font-size: 16px;
         }
-    
+
         #listTable tbody tr:hover {
             background-color: #f2f2f2;
         }
-    
+
         .btn {
             width: auto;
             padding: 10px 20px;
@@ -95,22 +99,22 @@
             background-image: -ms-linear-gradient(top, #3498db, #2980b9);
             background-image: -o-linear-gradient(top, #3498db, #2980b9);
             background-image: linear-gradient(to bottom, #3498db, #2980b9);
-            color: #ffffff;            
+            color: #ffffff;
         }
 
-    
+
         #listTable button {
             width: auto;
             margin: 0;
             padding: 8px 16px;
             font-size: 16px;
         }
-    
+
         .btn_set {
             margin-top: 20px;
             text-align: center;
         }
-    
+
         input[type=text],
         input[type=file] {
             width: calc(100% - 22px);
@@ -121,19 +125,23 @@
             border: 1px solid #ddd;
             font-size: 16px;
         }
-    
+
         @media (max-width: 600px) {
-            #form, .boardlist {
-                border-radius: 0; /* Full width on small screens */
+
+            #form,
+            .boardlist {
+                border-radius: 0;
+                /* Full width on small screens */
             }
-    
+
             #listTable {
                 width: 100%;
             }
-    
+
             input[type=text],
             input[type=file] {
-                width: calc(100% - 20px); /* Adjust input width for small screens */
+                width: calc(100% - 20px);
+                /* Adjust input width for small screens */
             }
         }
     </style>
@@ -161,6 +169,7 @@
             <div class="btn_set">
                 <input type="file" id="image_input" multiple><br>
                 <span id="btn_insert" class="btn">이미지 업로드</span>
+                <span id="btn_insert2" class="btn">이미지 업로드2</span>
             </div>
         </form>
     </div>
@@ -224,6 +233,53 @@
             })();
 
 
+            document.getElementById('image_input').addEventListener('change', function (event) {
+                var file = event.target.files[0];
+
+                if (file) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        var img = new Image();
+                        img.src = e.target.result;
+
+                        img.onload = function () {
+                            EXIF.getData(img, function () {
+                                var exifLong = EXIF.getTag(this, "GPSLongitude");
+                                var exifLat = EXIF.getTag(this, "GPSLatitude");
+                                var exifLongRef = EXIF.getTag(this, "GPSLongitudeRef");
+                                var exifLatRef = EXIF.getTag(this, "GPSLatitudeRef");
+
+                                if (exifLat && exifLong) {
+                                    // 위도와 경도를 도분초(DMS)에서 십진수로 변환
+                                    //var lat = convertToDecimal(latitude, latRef);
+                                    //var lon = convertToDecimal(longitude, lonRef);
+
+                                    if (exifLatRef == "S") {
+                                        var latitude = (exifLat[0] * -1) + (((exifLat[1] * -60) + (exifLat[2] * -1)) / 3600);
+                                    } else {
+                                        var latitude = exifLat[0] + (((exifLat[1] * 60) + exifLat[2]) / 3600);
+                                    }
+
+                                    if (exifLongRef == "W") {
+                                        var longitude = (exifLong[0] * -1) + (((exifLong[1] * -60) + (exifLong[2] * -1)) / 3600);
+                                    } else {
+                                        var longitude = exifLong[0] + (((exifLong[1] * 60) + exifLong[2]) / 3600);
+                                    }
+
+                                    console.log("Latitude: " + latitude);
+                                    console.log("Longitude: " + longitude);
+
+                                } else {
+                                    console.log("GPS data not found.");
+                                }
+                            });
+                        };
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            });
 
             // 입력
             $("#btn_insert").click(function () {
@@ -260,6 +316,18 @@
 
                 insertDB(systemDB);
             });
+
+
+            // 도분초(DMS) 형식을 십진수로 변환하는 함수
+            function convertToDecimal(coordinate, coordinateRef) {
+                var decimal = coordinate[0] + (coordinate[1] / 60) + (coordinate[2] / 3600);
+
+                if (coordinateRef === "S" || coordinateRef === "W") {
+                    decimal = decimal * -1;
+                }
+
+                return decimal;
+            }
 
             // 리스트 수정버튼
             $("body").on("click", ".btn_edit", function () {
