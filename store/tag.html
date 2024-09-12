@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Comma Separated Tags</title>
+  <style>
+    .tag-container {
+      display: flex;
+      flex-wrap: wrap;
+      border: 1px solid #ccc;
+      padding: 5px;
+      cursor: text;
+    }
+    .tag {
+      background-color: #f0f0f0;
+      border: 1px solid #ddd;
+      padding: 5px;
+      margin: 2px;
+      border-radius: 5px;
+    }
+    .tag-input {
+      border: none;
+      outline: none;
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+
+<div class="tag-container" id="tag-container">
+  <input type="text" id="tag-input" class="tag-input" placeholder="Enter tags separated by commas" />
+</div>
+
+<script>
+  const tagInput = document.getElementById('tag-input');
+  const tagContainer = document.getElementById('tag-container');
+
+  tagInput.addEventListener('keyup', function(event) {
+    if (event.key === ',') {
+      const inputValue = tagInput.value.trim().slice(0, -1);  // Remove trailing comma
+      if (inputValue) {
+        createTag(inputValue);
+        tagInput.value = '';  // Clear input field after adding tag
+      }
+    }
+  });
+
+  function createTag(text) {
+    const tag = document.createElement('span');
+    tag.classList.add('tag');
+    tag.textContent = text;
+    tagContainer.insertBefore(tag, tagInput);
+  }
+</script>
+
+</body>
+</html>

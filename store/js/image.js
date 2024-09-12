@@ -1,12 +1,3 @@
-function encodeImagesToBase64(files) {
-    const base64Promises = [];
-
-    for (let file of files) {
-        base64Promises.push(fileToBase64(file));
-    }
-
-    return Promise.all(base64Promises);
-}
 
 function fileToBase64(file) {
     return new Promise((resolve, reject) => {
