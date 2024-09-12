@@ -121,10 +121,14 @@
             padding: 10px;
             margin-top: 5px;
             margin-bottom: 5px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
             font-size: 16px;
         }
+
+        input[type=file] {
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
 
         @media (max-width: 600px) {
 
@@ -144,6 +148,37 @@
                 /* Adjust input width for small screens */
             }
         }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid #ccc;
+            cursor: text;
+        }
+
+        .tag {
+            background-color: #e6f0ff;
+            /* 연한 파란색 배경 */
+            color: #007bff;
+            /* 진한 파란색 텍스트 */
+            font-size: 12px;
+            /* 텍스트 크기 */
+            border: none;
+            /* 테두리 제거 */
+            border-radius: 10px;
+            /* 둥근 모서리 */
+            padding: 10px 10px;
+            /* 여백 */
+            cursor: pointer;
+            /* 마우스를 올렸을 때 포인터 */
+            margin: 10px 0 10px 3px;
+        }
+
+        .tag-input {
+            border: none;
+            outline: none;
+            flex: 1;
+        }
     </style>
 </head>
 
@@ -156,11 +191,12 @@
                 <legend>게시판</legend>
                 <ol id="list">
                     <li>
-                        <label for="tag">태그: </label>
-                        <input id="input_tag" type="text" placeholder="tag..." required autofocus>
+                        <div class="tag-container" id="tag-container">
+                            <input type="text" id="input_tag" class="tag-input"
+                                placeholder="Enter tags separated by commas" />
+                        </div>
                     </li>
                     <li>
-                        <label for="caption">내용: </label>
                         <input id="input_caption" type="text" placeholder="caption..." required>
                     </li>
                 </ol>
@@ -395,6 +431,34 @@
             // 글 지우기
             $("#btn_reset").click(resetForm);
         });
+
+
+        const tagInput = document.getElementById('input_tag');
+        const tagContainer = document.getElementById('tag-container');
+
+        tagInput.addEventListener('keyup', function (event) {
+            if (event.key === ',') {
+                const inputValue = tagInput.value.trim().slice(0, -1);  // Remove trailing comma
+                if (inputValue) {
+                    createTag(inputValue);
+                    tagInput.value = '';  // Clear input field after adding tag
+                }
+
+                let spans = document.querySelectorAll('#tag-container span');
+                let spansArray = Array.from(spans, span => span.textContent);
+                console.log(spansArray);
+
+
+                console.log($('#input_tag').val());
+            }
+        });
+
+        function createTag(text) {
+            const tag = document.createElement('span');
+            tag.classList.add('tag');
+            tag.textContent = text;
+            tagContainer.insertBefore(tag, tagInput);
+        }
 
 
     </script>
