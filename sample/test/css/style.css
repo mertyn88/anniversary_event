@@ -385,55 +385,24 @@ a {
   width: 50%;
 }
 
+.button-group {
+  padding: 10px 0 10px 0;
+}
 
-
-
-/* CSS */
-.button-51 {
-  background-color: transparent;
-  border: 1px solid #266DB6;
-  box-sizing: border-box;
-  color: #00132C;
-  font-family: "Avenir Next LT W01 Bold",sans-serif;
+.button {
+  background-color: #e6f0ff;
+  /* 연한 파란색 배경 */
+  color: #007bff;
+  /* 진한 파란색 텍스트 */
   font-size: 16px;
-  font-weight: 700;
-  line-height: 24px;
-  padding: 16px 23px;
-  position: relative;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.button-51:hover,
-.button-51:active {
-  outline: 0;
-}
-
-.button-51:hover {
-  background-color: transparent;
+  /* 텍스트 크기 */
+  border: none;
+  /* 테두리 제거 */
+  border-radius: 30px;
+  /* 둥근 모서리 */
+  padding: 10px 20px;
+  /* 여백 */
   cursor: pointer;
-}
-
-.button-51:before {
-  background-color: #D5EDF6;
-  content: "";
-  height: calc(100% + 3px);
-  position: absolute;
-  right: -7px;
-  top: -9px;
-  transition: background-color 300ms ease-in;
-  width: 100%;
-  z-index: -1;
-}
-
-.button-51:hover:before {
-  background-color: #6DCFF6;
-}
-
-@media (min-width: 768px) {
-  .button-51 {
-    padding: 16px 32px;
-  }
+  /* 마우스를 올렸을 때 포인터 */
+  margin: 10px 0 10px 10px;
 }

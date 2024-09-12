@@ -46,10 +46,12 @@ const query = {
     },
     "insert": {
         "date": today, //내부 삽입 날짜
-        "tag": "",
+        "tag": [],
         "caption": "",
         "primary": "",
         "number": 0,
+        "latitude": 0.0,
+        "longitude": 0.0,
         "encode": ""
     }
 };
@@ -78,7 +80,7 @@ async function existCouchDB() {
     return response;
 }
 
-async function insertCouchDB() {
-    const response = await fetchRequest('', query['insert']);
+async function insertCouchDB(_query) {
+    const response = await fetchRequest('', _query);
     return response;
 }

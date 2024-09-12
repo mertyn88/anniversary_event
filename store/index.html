@@ -203,6 +203,7 @@
 
     <script>
         const manageQuery = query;
+        const insertQueries = [];
 
         $(document).ready(function () {
             // 현재 리스트 출력
@@ -234,9 +235,7 @@
 
 
             document.getElementById('image_input').addEventListener('change', function (event) {
-                var file = event.target.files[0];
-
-                if (file) {
+                Array.from(event.target.files).forEach(file => {
                     var reader = new FileReader();
 
                     reader.onload = function (e) {
@@ -249,6 +248,9 @@
                                 var exifLat = EXIF.getTag(this, "GPSLatitude");
                                 var exifLongRef = EXIF.getTag(this, "GPSLongitudeRef");
                                 var exifLatRef = EXIF.getTag(this, "GPSLatitudeRef");
+
+                                // Deep copy
+                                let insertQuery = JSON.parse(JSON.stringify(query['insert']));
 
                                 if (exifLat && exifLong) {
                                     // 위도와 경도를 도분초(DMS)에서 십진수로 변환
@@ -267,30 +269,98 @@
                                         var longitude = exifLong[0] + (((exifLong[1] * 60) + exifLong[2]) / 3600);
                                     }
 
+                                    // 주소값 가져오기
+                                    const url = `https://dapi.kakao.com/v2/local/geo/coord2address.json?x=${longitude}&y=${latitude}&input_coord=WGS84`;
+                                    const options = {
+                                        method: 'GET',
+                                        headers: {
+                                            'Authorization': 'KakaoAK 30b34191c0d77c730ebf9443971e8857'  // 여기에 실제 API 키를 입력하세요.
+                                        }
+                                    };
+
+                                    fetch(url, options)
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            console.log(data);
+                                            if (data['meta']['total_count'] > 0) {
+                                                let address = data['documents'][0]['address'];
+                                                console.log(address);
+                                                // region_1depth_name + region_2depth_name + region_3depth_name
+
+
+                                                insertQuery['latitude'] = latitude;
+                                                insertQuery['longitude'] = longitude;
+
+                                                let region = [];
+                                                if (address['region_2depth_name'] !== '') region.push(address['region_2depth_name']);
+                                                if (address['region_3depth_name'] !== '') region.push(address['region_3depth_name']);
+
+                                                console.log(region.join(' '));
+                                                insertQuery['tag'].push(region.join(' '));
+
+                                                // 태그 표시
+                                                //$('#input_tag').val(region.join(' '));
+                                            }
+                                        })
+                                        .catch(error => console.error('Error:', error));
+
+
                                     console.log("Latitude: " + latitude);
                                     console.log("Longitude: " + longitude);
 
                                 } else {
                                     console.log("GPS data not found.");
+
+                                    insertQuery['latitude'] = 0.0;
+                                    insertQuery['longitude'] = 0.0;
                                 }
+
+                                insertQueries.push(insertQuery);
                             });
                         };
                     };
 
                     reader.readAsDataURL(file);
-                }
+                });
             });
 
             // 입력
             $("#btn_insert").click(function () {
                 const fileInput = document.getElementById('image_input');
-                const files = fileInput.files;
 
+
+                console.log(insertQueries);
+
+                Array.from(fileInput.files).forEach((file, index) => {
+                    let compressedBase64 = compressStringToBase64(file);
+                    (async () => {
+                        let response = await existCouchDB();
+                        let docIndex = 1;
+
+                        // 인덱스 숫자 부여
+                        if (response['docs'].length > 0) {
+                            docIndex = Number(response['docs'][0]['number']) + 1;
+                        }
+
+                        if ($('#input_tag').val() !== '') insertQueries[index]['tag'].push($('#input_tag').val());
+                        insertQueries[index]['caption'] = $('#input_caption').val();
+                        insertQueries[index]['primary'] = `${today}_${docIndex}`
+                        insertQueries[index]['number'] = docIndex;
+                        insertQueries[index]['encode'] = compressedBase64;
+
+                        response = await insertCouchDB(insertQueries[index]);
+                        console.log(response);
+                    })();
+                });
+                alert('업로드 완료');
+
+
+                /*
+                const files = fileInput.files;
                 if (files.length === 0) {
                     alert('Please select at least one file.');
                     return;
                 }
-
                 encodeImagesToBase64(files).then(encodedImages => {
                     let compressedBase64 = compressStringToBase64(encodedImages);
                     (async () => {
@@ -302,19 +372,23 @@
                             docIndex = Number(response['docs'][0]['number']) + 1;
                         }
 
-                        query['insert']['tag'] = $('#input_tag').val();
+
+
+                        query['insert']['tag'].push($('#input_tag').val());
                         query['insert']['caption'] = $('#input_caption').val();
                         query['insert']['primary'] = `${today}_${docIndex}`
                         query['insert']['number'] = docIndex;
                         query['insert']['encode'] = compressedBase64;
-                        response = await insertCouchDB();
-                        console.log(response);
-                        alert('업로드 완료');
+
+                        //response = await insertCouchDB();
+                        //console.log(response);
+                        //alert('업로드 완료');
                     })();
                 });
+                */
 
 
-                insertDB(systemDB);
+                //insertDB(systemDB);
             });
 
 
