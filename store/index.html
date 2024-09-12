@@ -353,42 +353,6 @@
                     })();
                 });
                 alert('업로드 완료');
-
-
-                /*
-                const files = fileInput.files;
-                if (files.length === 0) {
-                    alert('Please select at least one file.');
-                    return;
-                }
-                encodeImagesToBase64(files).then(encodedImages => {
-                    let compressedBase64 = compressStringToBase64(encodedImages);
-                    (async () => {
-                        let response = await existCouchDB();
-                        let docIndex = 1;
-
-                        // 인덱스 숫자 부여
-                        if (response['docs'].length > 0) {
-                            docIndex = Number(response['docs'][0]['number']) + 1;
-                        }
-
-
-
-                        query['insert']['tag'].push($('#input_tag').val());
-                        query['insert']['caption'] = $('#input_caption').val();
-                        query['insert']['primary'] = `${today}_${docIndex}`
-                        query['insert']['number'] = docIndex;
-                        query['insert']['encode'] = compressedBase64;
-
-                        //response = await insertCouchDB();
-                        //console.log(response);
-                        //alert('업로드 완료');
-                    })();
-                });
-                */
-
-
-                //insertDB(systemDB);
             });
 
 
