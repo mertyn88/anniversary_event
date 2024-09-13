@@ -8,7 +8,8 @@
     <script type="text/javascript" src="js/pako.min.js"></script>
     <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
     <script>
-        const databasePrefix = prompt("Enter your prefix:", "");
+        const databasePrefix = prompt("Enter your prefix: ", "");
+        const kakaoPrefix = prompt("Enter your kakao prefix: ", "");
         const databaseUrl = `https://${databasePrefix}-database.fly.dev/netlify-store`;
     </script>
     <script text="text/javascript" src="js/indexeddb.js"></script>
@@ -242,33 +243,7 @@
         const insertQueries = [];
 
         $(document).ready(function () {
-            // 현재 리스트 출력
-            // encode 제외
-            manageQuery['select']['fields'] = manageQuery['select']['fields'].filter(field => field !== 'encode');
-            (async () => {
-                let response = await selectCouchDB(manageQuery['select']);
-
-                response['docs'].forEach((element, index) => {
-                    var $row = $('<tr>').append(
-                        $('<td>').text(index),
-                        $('<td>').text(element['tag']),
-                        $('<td>').text(element['caption']),
-                        $('<td>').text(element['primary']),
-                        $('<td>').append(
-                            //$('<button>').addClass('btn_edit').text('수정'),
-                            $('<button>').addClass('btn').text('삭제')
-                        )
-                    );
-
-                    console.log(index);
-                    console.log(element);
-
-                    $('#listTable tbody').append($row);
-                });
-
-                console.log(response);
-            })();
-
+            display();
 
             document.getElementById('image_input').addEventListener('change', function (event) {
                 Array.from(event.target.files).forEach(file => {
@@ -310,7 +285,7 @@
                                     const options = {
                                         method: 'GET',
                                         headers: {
-                                            'Authorization': 'KakaoAK 30b34191c0d77c730ebf9443971e8857'  // 여기에 실제 API 키를 입력하세요.
+                                            'Authorization': `KakaoAK 30b34191c0d77c730ebf9443971e${kakaoPrefix}`  // 여기에 실제 API 키를 입력하세요.
                                         }
                                     };
 
@@ -362,6 +337,10 @@
 
             // 입력
             $("#btn_insert").click(function () {
+                // 리스트 비우기
+                $('#listTable tbody').empty();
+
+
                 const fileInput = document.getElementById('image_input');
 
 
@@ -378,10 +357,16 @@
                             docIndex = Number(response['docs'][0]['number']) + 1;
                         }
 
-                        if ($('#input_tag').val() !== '') insertQueries[index]['tag'].push($('#input_tag').val());
+                        // 태그 값 확인
+                        let spans = document.querySelectorAll('#tag-container span');
+                        let spansArray = Array.from(spans, span => span.textContent);
+                        console.log(spansArray);
+
+                        // 두 배열 병합후 # 처리
+                        insertQueries[index]['tag'] = [...insertQueries[index]['tag'], ...spansArray].map(item => `#${item}`);
                         insertQueries[index]['caption'] = $('#input_caption').val();
-                        insertQueries[index]['primary'] = `${today}_${docIndex}`
-                        insertQueries[index]['number'] = docIndex;
+                        insertQueries[index]['primary'] = `${today}_${docIndex + index}`
+                        insertQueries[index]['number'] = docIndex + index;
                         insertQueries[index]['encode'] = compressedBase64;
 
                         response = await insertCouchDB(insertQueries[index]);
@@ -389,6 +374,7 @@
                     })();
                 });
                 alert('업로드 완료');
+                display();
             });
 
 
@@ -433,6 +419,8 @@
         });
 
 
+        // 태그 값 저장
+
         const tagInput = document.getElementById('input_tag');
         const tagContainer = document.getElementById('tag-container');
 
@@ -443,11 +431,6 @@
                     createTag(inputValue);
                     tagInput.value = '';  // Clear input field after adding tag
                 }
-
-                let spans = document.querySelectorAll('#tag-container span');
-                let spansArray = Array.from(spans, span => span.textContent);
-                console.log(spansArray);
-
 
                 console.log($('#input_tag').val());
             }
@@ -461,6 +444,30 @@
         }
 
 
+        function display() {
+            // 현재 리스트 출력
+            // encode 제외
+            manageQuery['select']['fields'] = manageQuery['select']['fields'].filter(field => field !== 'encode');
+            (async () => {
+                let response = await selectCouchDB(manageQuery['select']);
+
+                console.log(response);
+
+                response['docs'].forEach((element, index) => {
+                    var $row = $('<tr>').append(
+                        $('<td>').text(index),
+                        $('<td>').text(element['tag']),
+                        $('<td>').text(element['caption']),
+                        $('<td>').text(element['primary']),
+                        $('<td>').append(
+                            //$('<button>').addClass('btn_edit').text('수정'),
+                            $('<button>').addClass('btn').text('삭제')
+                        )
+                    );
+                    $('#listTable tbody').append($row);
+                });
+            })();
+        }
     </script>
 </body>
 
