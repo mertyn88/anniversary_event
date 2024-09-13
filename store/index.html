@@ -206,7 +206,6 @@
             <div class="btn_set">
                 <input type="file" id="image_input" multiple><br>
                 <span id="btn_insert" class="btn">이미지 업로드</span>
-                <span id="btn_insert2" class="btn">이미지 업로드2</span>
             </div>
         </form>
     </div>
@@ -376,51 +375,9 @@
                 alert('업로드 완료');
                 display();
             });
-
-
-            // 도분초(DMS) 형식을 십진수로 변환하는 함수
-            function convertToDecimal(coordinate, coordinateRef) {
-                var decimal = coordinate[0] + (coordinate[1] / 60) + (coordinate[2] / 3600);
-
-                if (coordinateRef === "S" || coordinateRef === "W") {
-                    decimal = decimal * -1;
-                }
-
-                return decimal;
-            }
-
-            // 리스트 수정버튼
-            $("body").on("click", ".btn_edit", function () {
-                var no = $(this).data("no");
-                var idx = $(this).data("idx");
-                $("#id").val(idx);
-                loadRecord(no);
-            });
-
-            // 업데이트
-            $("#btn_update").click(function () {
-                updateDB(systemDB);
-            });
-
-            // 삭제
-            $("body").on("click", ".btn_delete", function () {
-                var idx = $(this).data("idx");
-                deleteDB(systemDB, idx);
-                selectAllList(systemDB, idx);
-            });
-
-            // 테이블 삭제
-            $("#btn_drop").click(function () {
-                dropTable(systemDB);
-            });
-
-            // 글 지우기
-            $("#btn_reset").click(resetForm);
         });
 
-
         // 태그 값 저장
-
         const tagInput = document.getElementById('input_tag');
         const tagContainer = document.getElementById('tag-container');
 
@@ -441,6 +398,17 @@
             tag.classList.add('tag');
             tag.textContent = text;
             tagContainer.insertBefore(tag, tagInput);
+        }
+
+        // 도분초(DMS) 형식을 십진수로 변환하는 함수
+        function convertToDecimal(coordinate, coordinateRef) {
+            var decimal = coordinate[0] + (coordinate[1] / 60) + (coordinate[2] / 3600);
+
+            if (coordinateRef === "S" || coordinateRef === "W") {
+                decimal = decimal * -1;
+            }
+
+            return decimal;
         }
 
 
