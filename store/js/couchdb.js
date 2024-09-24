@@ -56,9 +56,22 @@ const query = {
     }
 };
 
+const fetchGetRequest = async (url) => {
+    const credentials = btoa(`${databasePrefix}:${databasePrefix}`);
+    console.log(credentials);
+    const response = await fetch(`${databaseUrl}/${url}`, {
+        method: "GET",
+        headers: {
+            'Authorization': `Basic ${credentials}`,
+            'Content-Type': 'application/json'
+        }
+    });
+    return response.json();
+};
 
 const fetchRequest = async (event, query) => {
     const credentials = btoa(`${databasePrefix}:${databasePrefix}`);
+    console.log(credentials);
     const response = await fetch(`${databaseUrl}/${event}`, {
         method: "POST",
         headers: {
@@ -70,8 +83,8 @@ const fetchRequest = async (event, query) => {
     return response.json();
 };
 
-async function selectCouchDB() {
-    const response = await fetchRequest('_find', query['select']);
+async function selectCouchDB(_query) {
+    const response = await fetchRequest('_find', _query);
     return response;
 }
 

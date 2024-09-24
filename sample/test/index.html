@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Family Gallery</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:300,600'>
+  <link rel="stylesheet" href="css/normalize.min.css">
+  <link rel="stylesheet" href="css/magnific-popup.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    const databasePrefix = prompt("Enter your prefix: ", "");
+    const databaseUrl = `https://${databasePrefix}-database.fly.dev/netlify-store`;
+  </script>
+  <script text="text/javascript" src="../../store/js/couchdb.js"></script>
+  <script text="text/javascript" src="../../store/js/indexeddb.js"></script>
+  <script type="text/javascript" src="../../store/js/pako.min.js"></script>
+  <script text="text/javascript" src="../../store/js/image.js"></script>
+
+
+</head>
+
+<body>
+  <div id="group-list" class="button-group filters-button-group">
+    <button id="alllll" class="button is-checked" data-filter="*">#All</button>
+    <!--
+    <button class="button" data-filter=".beach">beach</button>
+    <button class="button" data-filter=".bird">bird</button>
+    -->
+  </div>
+
+  <article id="gallery-list" class='gallery grid' style="display: none;">
+    <!--
+    <a class='gallery-link beach' href='images/image_1.png'>
+      <figure class='gallery-image'>
+        <img src='images/image_1.png'>
+        <figcaption>Photo caption</figcaption>
+      </figure>
+    </a>
+    -->
+  </article>
+  <footer id='footer' role='contentinfo'>
+    <div class='container'>
+      <a class='logo' href='#' rel='home'>준명 · 다영 · 해인 가족 앨범</a>
+    </div>
+  </footer>
+  <script src='js/modernizr.min.js'></script>
+  <script src='js/jquery.3.2.1.min.js'></script>
+  <script src='js/jquery.1.1.0..magnific-popup.min.js'></script>
+  <script src='js/masonry.min.min.js'></script>
+  <script src='js/isotope.min.js'></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>
