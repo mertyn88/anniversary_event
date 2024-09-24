@@ -10,7 +10,20 @@
   <link rel="stylesheet" href="css/style.css">
 
   <script>
-    const databasePrefix = prompt("Enter your prefix: ", "");
+    function getParameterByName(name) {
+      const url = window.location.href;
+      const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+      const results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    }
+
+    let databasePrefix = getParameterByName('prefix');
+    if (!databasePrefix) {
+      // 파라미터가 없을 경우 사용자에게 prompt로 입력받음
+      databasePrefix = prompt("Enter your prefix: ", "");
+    }
     const databaseUrl = `https://${databasePrefix}-database.fly.dev/netlify-store`;
   </script>
   <script text="text/javascript" src="../../store/js/couchdb.js"></script>
