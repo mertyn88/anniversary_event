@@ -17,9 +17,23 @@
     <script text="text/javascript" src="js/image.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
     <script>
-
-
-
+        // 페이지 로딩전 검사
+        (function () {
+            const credentials = btoa(`${databasePrefix}:${databasePrefix}`);
+            fetch(`${databaseUrl}`, {
+                method: "GET",
+                headers: {
+                    'Authorization': `Basic ${credentials}`,
+                    'Content-Type': 'application/json'
+                }
+            }).then(data => {
+                console.log(data);
+            }).catch(error => {
+                console.log(error);
+                //alert('인증 실패');
+                window.history.back();
+            });
+        })();
     </script>
     <style>
         body {
@@ -250,12 +264,9 @@
             </tbody>
         </table>
     </div>
-
     <script>
         const manageQuery = query;
         const insertQueries = [];
-
-
 
         $(document).ready(function () {
             display();
