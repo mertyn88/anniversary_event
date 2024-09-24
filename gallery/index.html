@@ -2,80 +2,77 @@
 <html lang="en">
 
 <head>
-  <meta property="og:title" content="가족 앨범">
+    <meta property="og:title" content="가족 앨범">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://anniversary-event.netlify.app/gallery/meta.png">
     <meta property="og:description" content="해인이 위주의 앨범">
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
 
 
-  <title>Family Gallery</title>
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:300,600'>
-  <link rel="stylesheet" href="css/normalize.min.css">
-  <link rel="stylesheet" href="css/magnific-popup.css">
-  <link rel="stylesheet" href="css/style.css">
+    <title>Family Gallery</title>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Montserrat:300,600'>
+    <link rel="stylesheet" href="css/normalize.min.css">
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="css/style.css">
 
-  <script>
-    function getParameter(name) {
-      const url = window.location.href;
-      const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-      const results = regex.exec(url);
-      if (!results) return null;
-      if (!results[2]) return '';
-      return decodeURIComponent(results[2].replace(/\+/g, ' '));
-    }
-    let databasePrefix = getParameter('prefix');
-    if (!databasePrefix) {
-      // 파라미터가 없을 경우 사용자에게 prompt로 입력받음
-      databasePrefix = prompt("Enter your prefix: ", "");
-    }
-    const databaseUrl = `https://${databasePrefix}-database.fly.dev/netlify-store`;
-  </script>
-  <script text="text/javascript" src="../../store/js/couchdb.js"></script>
-  <script text="text/javascript" src="../../store/js/indexeddb.js"></script>
-  <script type="text/javascript" src="../../store/js/pako.min.js"></script>
-  <script text="text/javascript" src="../../store/js/image.js"></script>
+    <script>
+        function getParameter(name) {
+            const url = window.location.href;
+            const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+            const results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+        let databasePrefix = getParameter('prefix');
+        if (!databasePrefix) {
+            // 파라미터가 없을 경우 사용자에게 prompt로 입력받음
+            databasePrefix = prompt("Enter your prefix: ", "");
+        }
+        const databaseUrl = `https://${databasePrefix}-database.fly.dev/netlify-store`;
+    </script>
+    <script text="text/javascript" src="../../store/js/couchdb.js"></script>
+    <script text="text/javascript" src="../../store/js/indexeddb.js"></script>
+    <script type="text/javascript" src="../../store/js/pako.min.js"></script>
+    <script text="text/javascript" src="../../store/js/image.js"></script>
 
-  <script>
-    let indexeddbCache = getParameter('cache');
-    if (indexeddbCache === 'y') {
-      deleteAllIndexedDB();
-    }
-  </script>
-
-
+    <script>
+        let indexeddbCache = getParameter('cache');
+        if (indexeddbCache === 'y') {
+            deleteAllIndexedDB();
+        }
+    </script>
 </head>
 
 <body>
-  <div id="group-list" class="button-group filters-button-group">
-    <button id="alllll" class="button is-checked" data-filter="*">#All</button>
-    <!--
-    <button class="button" data-filter=".beach">beach</button>
-    <button class="button" data-filter=".bird">bird</button>
-    -->
-  </div>
-
-  <article id="gallery-list" class='gallery grid' style="display: none;">
-    <!--
-    <a class='gallery-link beach' href='images/image_1.png'>
-      <figure class='gallery-image'>
-        <img src='images/image_1.png'>
-        <figcaption>Photo caption</figcaption>
-      </figure>
-    </a>
-    -->
-  </article>
-  <footer id='footer' role='contentinfo'>
-    <div class='container'>
-      <a class='logo' href='#' rel='home' style="color: #007bff;">준명 · 다영 · 해인 가족 앨범</a>
+    <div id="group-list" class="button-group filters-button-group">
+        <button id="all" class="button is-checked" data-filter="*">#All</button>
+        <!--
+        <button class="button" data-filter=".beach">beach</button>
+        <button class="button" data-filter=".bird">bird</button>
+        -->
     </div>
-  </footer>
-  <script src='js/modernizr.min.js'></script>
-  <script src='js/jquery.3.2.1.min.js'></script>
-  <script src='js/jquery.1.1.0..magnific-popup.min.js'></script>
-  <script src='js/masonry.min.min.js'></script>
-  <script src='js/isotope.min.js'></script>
-  <script src="js/script.js"></script>
-</body>
 
+    <article id="gallery-list" class='gallery grid' style="display: none;">
+        <!--
+        <a class='gallery-link beach' href='images/image_1.png'>
+        <figure class='gallery-image'>
+            <img src='images/image_1.png'>
+            <figcaption>Photo caption</figcaption>
+        </figure>
+        </a>
+        -->
+    </article>
+    <footer id='footer' role='contentinfo'>
+        <div class='container'>
+            <a class='logo' href='#' rel='home' style="color: #007bff;">준명 · 다영 · 해인 가족 앨범</a>
+        </div>
+    </footer>
+    <script src='js/modernizr.min.js'></script>
+    <script src='js/jquery.3.2.1.min.js'></script>
+    <script src='js/jquery.1.1.0..magnific-popup.min.js'></script>
+    <script src='js/masonry.min.min.js'></script>
+    <script src='js/isotope.min.js'></script>
+    <script type="module" src="js/script.js"></script>
+</body>
 </html>

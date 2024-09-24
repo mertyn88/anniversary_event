@@ -5,3 +5,12 @@
 해당 페이지의 소스를 참고 하였습니다.
 
 - https://woorim960.github.io/only-for-you/
+
+
+
+
+couchdb - https://fly.io
+web page - https://app.netlify.com/
+indexeddb - browser
+
+
