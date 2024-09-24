@@ -130,7 +130,7 @@ $(document).ready(function () {
       galleryList.show();
       $('#alllll').trigger('click');
       
-    }, 500);
+    }, 1000);
   })();
 });
 

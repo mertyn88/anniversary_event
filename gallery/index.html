@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/style.css">
 
   <script>
-    function getParameterByName(name) {
+    function getParameter(name) {
       const url = window.location.href;
       const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
       const results = regex.exec(url);
@@ -18,8 +18,7 @@
       if (!results[2]) return '';
       return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
-
-    let databasePrefix = getParameterByName('prefix');
+    let databasePrefix = getParameter('prefix');
     if (!databasePrefix) {
       // 파라미터가 없을 경우 사용자에게 prompt로 입력받음
       databasePrefix = prompt("Enter your prefix: ", "");
@@ -30,6 +29,13 @@
   <script text="text/javascript" src="../../store/js/indexeddb.js"></script>
   <script type="text/javascript" src="../../store/js/pako.min.js"></script>
   <script text="text/javascript" src="../../store/js/image.js"></script>
+
+  <script>
+    let indexeddbCache = getParameter('cache');
+    if (indexeddbCache === 'y') {
+      deleteAllIndexedDB();
+    }
+  </script>
 
 
 </head>
@@ -55,7 +61,7 @@
   </article>
   <footer id='footer' role='contentinfo'>
     <div class='container'>
-      <a class='logo' href='#' rel='home'>준명 · 다영 · 해인 가족 앨범</a>
+      <a class='logo' href='#' rel='home' style="color: #007bff;">준명 · 다영 · 해인 가족 앨범</a>
     </div>
   </footer>
   <script src='js/modernizr.min.js'></script>
