@@ -1,13 +1,47 @@
+import { coordinate } from "./exif.js";
+
 const manageQuery = query;
 const insertQueries = [];
+
+
+function loadImage(reader) {
+    return new Promise((resolve, reject) => {
+        var img = new Image();
+        img.onload = () => resolve(img);
+        img.onerror = reject;
+        
+        img.src = reader;
+    });
+}
+
+function loadReader(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+
+        reader.readAsDataURL(file);
+    });
+}
 
 $(document).ready(function () {
     display();
 
     document.getElementById('image_input').addEventListener('change', function (event) {
         Array.from(event.target.files).forEach(file => {
-            var reader = new FileReader();
 
+            (async () => {
+                let reader = await loadReader(file);
+                let image = await loadImage(reader);
+                let imageCoordinate = await coordinate(image);
+                console.log(imageCoordinate);
+
+                console.log('휴');
+            })();
+
+
+            var reader = new FileReader();
             reader.onload = function (e) {
                 var img = new Image();
                 img.src = e.target.result;
