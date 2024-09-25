@@ -25,12 +25,13 @@ function loadReader(file) {
     });
 }
 
-$(document).ready(function () {
+$(window).on('load', function() {
     display();
 
     document.getElementById('image_input').addEventListener('change', function (event) {
         Array.from(event.target.files).forEach(file => {
 
+            /*
             (async () => {
                 let reader = await loadReader(file);
                 let image = await loadImage(reader);
@@ -38,8 +39,9 @@ $(document).ready(function () {
                 console.log(imageCoordinate);
 
                 console.log('휴');
+                이후 리팩토링 재게
             })();
-
+            */
 
             var reader = new FileReader();
             reader.onload = function (e) {
@@ -227,6 +229,8 @@ function convertToDecimal(coordinate, coordinateRef) {
 }
 
 
+
+
 function display() {
     // 현재 리스트 출력
     // encode 제외
@@ -244,7 +248,7 @@ function display() {
                 $('<td>').append(
                     //$('<button>').addClass('btn_edit').text('수정'),
                     //$('<button>').addClass('btn').text('삭제'),
-                    $("<button onclick='viewImage(this)'>").addClass('btn viewBtn').text('보기')
+                    $("<button onclick='javascript:viewImage(this)'>").addClass('btn viewBtn').text('보기')
                 )
             );
             $('#listTable tbody').append($row);
