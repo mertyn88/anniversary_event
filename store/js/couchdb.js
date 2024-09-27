@@ -56,20 +56,6 @@ const query = {
     }
 };
 
-const fetchGet = async (url) => {
-    const credentials = btoa(`${databasePrefix}:${databasePrefix}`);
-    console.log(credentials);
-
-     fetch(`${databaseUrl}/${url}`, {
-        method: "GET",
-        headers: {
-            'Authorization': `Basic ${credentials}`,
-            'Content-Type': 'application/json'
-        }
-    });
-    return response.json();
-};
-
 
 const fetchGetRequest = async (url) => {
     const credentials = btoa(`${databasePrefix}:${databasePrefix}`);

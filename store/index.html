@@ -35,46 +35,6 @@
                 window.history.back();
             });
         })();
-
-        function viewImage(btn) {
-            // 클릭된 버튼의 tr 요소 가져오기
-            var tr = btn.closest('tr');
-            // 해당 tr에서 4번째 <td> 요소 가져오기 (인덱스 3)
-            var fourthTd = tr.getElementsByTagName('td')[3];
-            // 4번째 <td>의 텍스트 가져오기
-            var text = fourthTd.textContent;
-
-            btn.setAttribute('data-expanded', 'true');
-            const imageRow = document.createElement('tr');
-            imageRow.className = 'image-row';
-            const imageCell = document.createElement('td');
-            imageCell.colSpan = 5; // 테이블의 컬럼 수에 따라 조정
-            const img = document.createElement('img');
-
-            (async () => {
-                const q = {
-                    "selector": {
-                        "primary": {
-                            "$eq": text
-                        }
-                    },
-                    "fields": [
-                        "encode"
-                    ]
-                };
-
-                let response = await selectCouchDB(q);
-                console.log(response);
-
-                response['docs'].forEach((element, index) => {
-                    img.src = decompressBase64ToString(element['encode']);
-                    imageCell.appendChild(img);
-                    imageRow.appendChild(imageCell);
-                    tr.parentNode.insertBefore(imageRow, tr.nextSibling);
-                    imageRow.style.display = 'table-row'; // 이미지 행 보이기
-                });
-            })();
-        }
     </script>
 
 </head>
