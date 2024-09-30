@@ -9,8 +9,22 @@
     <script type="text/javascript" src="js/pako.min.js"></script>
     <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
     <script>
-        const databasePrefix = prompt("Enter your prefix: ", "");
-        const kakaoPrefix = prompt("Enter your kakao prefix: ", "");
+        function getParameter(name) {
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
+        }
+
+        let databasePrefix = getParameter('database');
+        if (!databasePrefix) {
+            // 파라미터가 없을 경우 사용자에게 prompt로 입력받음
+            databasePrefix = prompt("Enter your prefix: ", "");
+        }
+
+        let kakaoPrefix = getParameter('kakao');
+        if (!kakaoPrefix) {
+            // 파라미터가 없을 경우 사용자에게 prompt로 입력받음
+            kakaoPrefix = prompt("Enter your kakao prefix: ", "");
+        }
         const databaseUrl = `https://${databasePrefix}-database.fly.dev/netlify-store`;
     </script>
     <script text="text/javascript" src="js/indexeddb.js"></script>
@@ -62,7 +76,7 @@
             <div class="btn_set">
                 <input type="file" id="image_input" multiple><br>
                 <span id="btn_insert" class="btn">이미지 업로드</span>
-                <span class="btn" onclick="window.location.href='/gallery/index.html?prefix=liam'">갤러리 이동</span>
+                <span class="btn" onclick="window.location.href='/gallery/index.html?database=liam'">갤러리 이동</span>
             </div>
         </form>
     </div>

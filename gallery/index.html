@@ -17,12 +17,8 @@
 
     <script>
         function getParameter(name) {
-            const url = window.location.href;
-            const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
-            const results = regex.exec(url);
-            if (!results) return null;
-            if (!results[2]) return '';
-            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+            const params = new URLSearchParams(window.location.search);
+            return params.get(name);
         }
         let databasePrefix = getParameter('prefix');
         if (!databasePrefix) {
@@ -70,9 +66,10 @@
     </footer>
     <script src='js/modernizr.min.js'></script>
     <script src='js/jquery.3.2.1.min.js'></script>
-    <script src='js/jquery.1.1.0..magnific-popup.min.js'></script>
+    <script src='js/jquery.1.1.0.magnific-popup.min.js'></script>
     <script src='js/masonry.min.min.js'></script>
     <script src='js/isotope.min.js'></script>
     <script type="module" src="js/script.js"></script>
 </body>
+
 </html>
