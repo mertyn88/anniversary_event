@@ -25,6 +25,7 @@ export async function galleryPopup() {
     });
 
 
+    
 
     var $grid = $('.grid').isotope({
         masonry: {

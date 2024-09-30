@@ -112,18 +112,11 @@ body {
   column-gap: 0;
 }
 
-@media (min-width: 480px) {
-  .gallery {
-    -moz-column-count: 2;
-    column-count: 2;
-  }
-}
 
-@media (min-width: 1260px) {
-  .gallery {
-    -moz-column-count: 3;
-    column-count: 3;
-  }
+
+.gallery {
+  -moz-column-count: 3;
+  column-count: 3;
 }
 
 .gallery-image {
@@ -218,11 +211,13 @@ html:not(.touch) .gallery-image:hover:after {
   top: auto;
   bottom: 0;
   margin-top: 0;
+  
 }
 
 .mfp-with-zoom .mfp-title {
   top: auto;
   bottom: 2em;
+  font-size: 2em;
 }
 
 .mfp-arrow {
@@ -398,7 +393,7 @@ a {
 /* 갤러리 링크 스타일 */
 .gallery-link {
   /* 필요한 스타일 */
-  width: 50%;
+  width: 33.3%;
 }
 
 .button-group {
