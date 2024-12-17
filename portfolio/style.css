@@ -38145,10 +38145,30 @@ div[data-callout-metadata*=pw9].callout.callout.callout.callout {
     width: 88%
 }
 
+
+/* Liam custom */
 div[data-callout=multi-column].callout>.callout-content>div[data-callout-metadata*=min-0],
 div[data-callout=multi-column].callout>.callout-content>div[data-callout-metadata*=mw0].callout.callout {
-    flex-basis: 0
+    flex: 1 1 250px; /* 기본 크기 250px, 확장 가능 */
+    max-width: calc(100% / 2); /* 최대 2열로 제한 */
 }
+
+@media (max-width: 768px) {
+    div[data-callout=multi-column].callout>.callout-content>div[data-callout-metadata*=min-0],
+    div[data-callout=multi-column].callout>.callout-content>div[data-callout-metadata*=mw0].callout.callout {
+        flex: 1 1 100%; /* 한 행에 하나씩 */
+        max-width: 100%; /* 최대 너비도 100% */
+    }
+}
+
+div[data-callout=multi-column].callout .callout-title-inner,
+div[data-callout=multi-column].callout .callout-content {
+    word-break: break-word;
+    white-space: normal;
+}
+
+/* /Liam custom */
+
 
 div[data-callout=multi-column].callout>.callout-content>div[data-callout-metadata*=dw1].callout {
     flex: 1 0 auto
